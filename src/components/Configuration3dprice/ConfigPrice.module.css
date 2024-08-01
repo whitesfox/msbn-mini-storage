@@ -1,0 +1,118 @@
+.priceComponents {
+  /* width:1400px;
+margin:0 auto; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 5rem;
+  padding: 0 5rem;
+}
+.priceComponentsTitle {
+  text-align: center;
+}
+.priceComponentsForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mainOption {
+  margin: 2rem 0;
+}
+.mainHeading {
+  padding: 0;
+  margin: 0;
+}
+.secondaryHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 7px;
+  padding: 0.5rem 0.2rem;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.secondaryHeadingArrow {
+  margin-right: 1rem;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.optionInputAndSave {
+  display: flex;
+  align-items: center;
+}
+.optionLabel {
+  font-size: 1.2rem;
+  padding: 0;
+}
+.optionInputAndSave button {
+  cursor: pointer;
+font-size: 14px;
+border-radius: 24px;
+padding: 5px 18px 5px;
+display: inline-block;
+margin: 15px 0;
+text-decoration: inherit;
+background-color: rgba(25, 100, 50, 1);
+color: white;
+border: 1px solid transparent;
+margin-left: 1rem;
+margin-right: 2rem;
+}
+
+@media screen and (max-width: 850px) {
+  .option {
+    width: 40%;
+    margin-bottom: 1rem;
+  }
+  .optionInputAndSave button {
+    padding: 5px 18px 5px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .option {
+    width: 30%;
+    margin-bottom: 1rem;
+  }
+  .optionInputAndSave button {
+    font-size: 11px;
+    padding: 3px 10px 2px;
+  }
+  .priceComponents {
+    padding: 0 2rem;
+  }
+}
+@media screen and (max-width: 620px) {
+  .option {
+    min-width: 200px;
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 460px) {
+  .optionInputAndSave button {
+    font-size: 9px;
+    padding: 1px 8px 1px;
+  }
+  .option {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .optionInputAndSave input {
+    padding: 0.3rem;
+
+    font-size: 0.8rem;
+  }
+  .secondaryHeading {
+    font-size: 1rem;
+  }
+  .optionLabel {
+    font-size: 1rem;
+    padding: 0;
+  }
+}

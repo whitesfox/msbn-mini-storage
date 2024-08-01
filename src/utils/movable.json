@@ -1,0 +1,186 @@
+[
+  {
+    "name": "8 x 8",
+    "type": "Roll-up door",
+    "width": 8.2,
+    "height": 8.1,
+    "depth": 0.2
+  },
+  {
+    "name": "8 x 10",
+    "type": "Roll-up door",
+    "width": 8.2,
+    "height": 10.1,
+    "depth": 0.2
+  },
+  {
+    "name": "10 x 8",
+    "type": "Roll-up door",
+    "width": 10.2,
+    "height": 8.1,
+    "depth": 0.2
+  },
+  {
+    "name": "10 x 10",
+    "type": "Roll-up door",
+    "width": 10.2,
+    "height": 10.1,
+    "depth": 0.2
+  },
+  {
+    "name": "10 x 12",
+    "type": "Roll-up door",
+    "width": 10.2,
+    "height": 12.1,
+    "depth": 0.2
+  },
+  {
+    "name": "10 x 14",
+    "type": "Roll-up door",
+    "width": 10.2,
+    "height": 14.1,
+    "depth": 0.2
+  },
+  {
+    "name": "12 x 8",
+    "type": "Roll-up door",
+    "width": 12.2,
+    "height": 8.1,
+    "depth": 0.2
+  },
+  {
+    "name": "12 x 10",
+    "type": "Roll-up door",
+    "width": 12.2,
+    "height": 10.1,
+    "depth": 0.2
+  },
+  {
+    "name": "12 x 12",
+    "type": "Roll-up door",
+    "width": 12.2,
+    "height": 12.1,
+    "depth": 0.2
+  },
+  {
+    "name": "12 x 14",
+    "type": "Roll-up door",
+    "width": 12.2,
+    "height": 14.1,
+    "depth": 0.2
+  },
+  {
+    "name": "14 x 8",
+    "type": "Roll-up door",
+    "width": 14.2,
+    "height": 8.1,
+    "depth": 0.2
+  },
+  {
+    "name": "14 x 10",
+    "type": "Roll-up door",
+    "width": 14.2,
+    "height": 10.1,
+    "depth": 0.2
+  },
+  {
+    "name": "14 x 12",
+    "type": "Roll-up door",
+    "width": 14.2,
+    "height": 12.1,
+    "depth": 0.2
+  },
+  {
+    "name": "14 x 14",
+    "type": "Roll-up door",
+    "width": 14.2,
+    "height": 14.1,
+    "depth": 0.2
+  },
+
+  {
+    "name": "3 x 7",
+    "type": "Walk-door",
+    "width": 3.2,
+    "height": 7.1,
+    "depth": 0.2
+  },
+  {
+    "name": "4 x 7",
+    "type": "Walk-door",
+    "width": 4.2,
+    "height": 7.1,
+    "depth": 0.2
+  },
+  {
+    "name": "6 x 7",
+    "type": "Walk-door",
+    "width": 6.2,
+    "height": 7.1,
+    "depth": 0.2
+  },
+
+  {
+    "name": "3 x 3",
+    "type": "Window",
+    "width": 3.2,
+    "height": 3.2,
+    "depth": 0.2
+  },
+  {
+    "name": "3 x 4",
+    "type": "Window",
+    "width": 3.2,
+    "height": 4.2,
+    "depth": 0.2
+  },
+  {
+    "name": "3 x 5",
+    "type": "Window",
+    "width": 3.2,
+    "height": 5.2,
+    "depth": 0.2
+  },
+  {
+    "name": "4 x 3",
+    "type": "Window",
+    "width": 4.2,
+    "height": 3.2,
+    "depth": 0.2
+  },
+  {
+    "name": "4 x 4",
+    "type": "Window",
+    "width": 4.2,
+    "height": 4.2,
+    "depth": 0.2
+  },
+  {
+    "name": "4 x 5",
+    "type": "Window",
+    "width": 4.2,
+    "height": 5.2,
+    "depth": 0.2
+  },
+  {
+    "name": "6 x 3",
+    "type": "Window",
+    "width": 6.2,
+    "height": 3.2,
+    "depth": 0.2
+  },
+  {
+    "name": "6 x 4",
+    "type": "Window",
+    "width": 6.2,
+    "height": 4.2,
+    "depth": 0.2
+  },
+  {
+    "name": "6 x 5",
+    "type": "Window",
+    "width": 6.2,
+    "height": 5.2,
+    "depth": 0.2
+  }
+]

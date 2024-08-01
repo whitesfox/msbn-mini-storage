@@ -1,0 +1,8 @@
+{
+  "endOfLine": "lf",
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "singleAttributePerLine": true,
+  "singleQuote": false,
+  "tailwindFunctions": ["classNames"]
+}

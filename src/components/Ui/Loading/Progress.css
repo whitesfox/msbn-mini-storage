@@ -1,0 +1,62 @@
+.loadingContainer{
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    background-color: #ffffff8f;
+    z-index: 100;
+}
+.bgcolorHeavy{
+    background-color: #fffffff3;
+}
+.loading {
+    width: 250px;
+    display: block;
+    height: 2px;
+    margin: 0px auto; 
+    border-radius: 2px;
+    background-color: #cfcfcf;
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+    z-index: 1;
+}
+ .loading:before {
+    content:'';
+    height: 3px;
+    width: 68px;
+    position: absolute;
+    -webkit-transform: translate(-34px, 0);
+    -ms-transform: translate(-34px, 0);
+    transform: translate(-34px, 0);
+    background-color: #3b4a5e;
+    border-radius: 2px;
+    -webkit-animation: initial-loading 1.5s infinite ease;
+    animation: animation 1.6s infinite ease;
+}
+@-webkit-keyframes animation {
+    0% {
+        left: 0
+    }
+    50% {
+        left: 100%
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes animation {
+    0% {
+        left: 0
+    }
+    50% {
+        left: 100%
+    }
+    100% {
+        left: 0
+    }
+}

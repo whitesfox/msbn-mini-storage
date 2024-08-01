@@ -1,0 +1,262 @@
+input[type="range"] {
+  -webkit-appearance: none;
+  margin: 20px 0;
+  width: 100%;
+}
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: rgba(25, 100, 50, 1);
+  border-radius: 25px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 1);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: rgba(25, 100, 50, 1);
+}
+.range-wrap {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.range-value {
+  position: absolute;
+  top: -50%;
+}
+.range-value span {
+  line-height: 24px;
+  text-align: center;
+  background: rgba(25, 100, 50, 1);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  border-radius: 6px;
+  padding: 0.5rem 0.5rem;
+}
+.range-value span input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 70px;
+  text-align: center;
+}
+.range-value span:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid rgba(25, 100, 50, 1);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
+}
+
+.range-value-percentage {
+  position: absolute;
+  top: 100%;
+}
+.range-value-percentage span {
+  line-height: 24px;
+  text-align: center;
+
+  border: none;
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  border-radius: 6px;
+  padding: 0.5rem 0.5rem;
+}
+.range-value-percentage span input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 70px;
+  text-align: center;
+}
+
+.interestRatePer {
+  position: absolute;
+  top: 48%;
+  font-size: 1rem;
+  left: 35px;
+}
+.formWrapper {
+  max-width: 800px;
+  margin: auto;
+  animation: scrollAni 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s ease;
+}
+.paymentCalBody {
+  padding: 50px 120px;
+}
+
+@media screen and (max-width: 680px) {
+  .formWrapper {
+    width: 90%;
+  }
+  .paymentCalBody {
+    padding: 120px 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  .mainTitle {
+    font-size: 24px;
+  }
+  .mainPara {
+    font-size: 12px;
+  }
+  .estimatedCost {
+    font-size: 24px;
+  }
+  .interestRateInput {
+    padding: 14px 10px;
+  }
+  .payment-slider-thumb {
+    width: 85%;
+  }
+  .downPayment {
+    font-size: 24px;
+  }
+  .totalMortage {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .formWrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .paymentCalBody {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .mainTitle {
+    margin-bottom: 0.8rem;
+  }
+  .mainPara {
+    font-size: 12px;
+    margin-bottom: 0.8rem;
+  }
+  .estimatedCostBody {
+    margin-bottom: 0.8rem;
+  }
+  .estimatedCost {
+    font-size: 18px;
+  }
+  .interestRateInput {
+    padding: 10px 10px;
+  }
+
+  .downPaymentSlider {
+    margin-bottom: 2rem;
+  }
+  .downPaymentWrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .downPaymentBody {
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  .downPayment {
+    font-size: 16px;
+  }
+  .totalMortage {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .mainTitle {
+    font-size: 16px;
+    margin-bottom: 0.4rem;
+  }
+  .mainPara {
+    font-size: 10px;
+    margin-bottom: 0.8rem;
+  }
+  .estimatedCostBody {
+    margin-bottom: 0.8rem;
+  }
+  .estimatedCost {
+    font-size: 14px;
+  }
+  .inputFieldContainer {
+    flex-direction: column;
+  }
+  .inputFieldTerm,
+  .inputFieldInterestRate {
+    width: 100%;
+    margin-left: 0;
+  }
+  .interestRateInput {
+    padding: 10px 10px;
+  }
+
+  .percentageMediaMin,
+  .percentageMediaMax {
+    font-size: 12px;
+    z-index: 0;
+  }
+  .payment-slider-thumb::-moz-range-thumb {
+    width: 10px;
+    height: 15px;
+  }
+  .payment-slider-thumb::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+  }
+  .downPaymentTaxIncluded {
+    font-size: 11px;
+  }
+  .totalMortage {
+    font-size: 11px;
+    margin-left: 0.5rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .mainTitle {
+    font-size: 0.8rem;
+  }
+  .estimatedCost {
+    font-size: 0.8rem;
+  }
+  .downPaymentBody {
+    flex-direction: column;
+  }
+}
+@keyframes scrollAni {
+  0% {
+    transform: translate3d(0, 10%, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

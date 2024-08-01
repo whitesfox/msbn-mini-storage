@@ -1,0 +1,17 @@
+.slider-thumb::-webkit-slider-thumb {
+  /* Remove default styles */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(25, 100, 50, 1);
+  cursor: pointer;
+}
+.slider-thumb::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(25, 100, 50, 1);
+  cursor: pointer;
+}
