@@ -5,7 +5,6 @@ import { GableEndWall } from "3dcomponents/Models/EndWall/GableEndWall";
 import { GableSideWall } from "3dcomponents/Models/SideWall/GableSideWall";
 import { DoorGroup } from "3dcomponents/ModelGroups/DoorGroup";
 import { GableTrimGroup } from "3dcomponents/ModelGroups/TrimGroups/GableTrimGroup";
-import { GableRigidFrameGroup } from "3dcomponents/ModelGroups/RigidFrameGroups/GableRigidFrameGroup";
 import { GableDownspoutGroup } from "3dcomponents/ModelGroups/DownSpoutGroups/GableDownspoutGroup";
 
 export const GableBuilding = () => {
@@ -46,7 +45,6 @@ export const GableBuilding = () => {
       <GableRoof flag={false} />
       <DoorGroup />
       <GableTrimGroup />
-      <GableRigidFrameGroup />
       <GableDownspoutGroup />
     </group>
   );

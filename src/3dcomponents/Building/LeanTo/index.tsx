@@ -8,7 +8,6 @@ import { LeanToRoof } from "3dcomponents/Models/Roof/LeanToRoof";
 import { LeanToEndWall } from "3dcomponents/Models/EndWall/LeanToEndWall";
 import { LeanToTrimGroup } from "3dcomponents/ModelGroups/TrimGroups/LeanToTrimGroup";
 import { LeanToSideWall } from "3dcomponents/Models/SideWall/LeanToSideWall";
-import { LeanToRidigFrameGroup } from "3dcomponents/ModelGroups/RigidFrameGroups/LeanToRigidFrameGroup";
 import { LeanToDownspoutGroup } from "3dcomponents/ModelGroups/DownSpoutGroups/LeanToDownspoutGroup";
 import { useDoorStore } from "store/useDoor";
 import { BuildingInfo } from "store/useLeanTo";
@@ -757,14 +756,6 @@ export const LeanTo = ({
         position={[lPos[0], lPos[1], 0]}
         rotation={lRot}
       >
-        <LeanToRidigFrameGroup
-          wall={wall}
-          lWidth={lWidth * 2}
-          lLength={lLength}
-          lEaveHeight={lEaveHeight}
-          lDeltaHeight={lDeltaHeight}
-          lPos={[0, 0, lPos[2]]}
-        />
         <LeanToDownspoutGroup
           type={type}
           wall={wall}

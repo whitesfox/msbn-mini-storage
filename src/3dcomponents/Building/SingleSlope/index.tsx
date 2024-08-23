@@ -5,7 +5,6 @@ import { SingleSlopeEndWall } from "3dcomponents/Models/EndWall/SingleSlopeEndWa
 import { SingleSlopeSideWall } from "3dcomponents/Models/SideWall/SingleSlopeSideWall";
 import { DoorGroup } from "3dcomponents/ModelGroups/DoorGroup";
 import { SingleSlopeTrimGroup } from "3dcomponents/ModelGroups/TrimGroups/SingleSlopeTrimGroup";
-import { SingleSlopeRigidFrameGroup } from "3dcomponents/ModelGroups/RigidFrameGroups/SingleSlopeRigidFrameGroup";
 import { SingleSlopeDownspoutGroup } from "3dcomponents/ModelGroups/DownSpoutGroups/SingleSlopeDownspoutGroup";
 
 export const SingleSlope = () => {
@@ -27,13 +26,6 @@ export const SingleSlope = () => {
         width={width}
         eaveHeight={eaveHeight + deltaHeight}
         basicLength={basicLength}
-      />
-      <SingleSlopeRigidFrameGroup
-        lWidth={width - 0.2}
-        lLength={basicLength}
-        lEaveHeight={eaveHeight}
-        lDeltaHeight={deltaHeight}
-        lPos={[-0.2, 0, 0]}
       />
       <SingleSlopeEndWall
         flag={false}
