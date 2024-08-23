@@ -94,7 +94,15 @@ export const overhangList = [
   { id: 7, val: 6 },
 ];
 
-export const widthSizeList = Array.from({ length: 61 }, () => 0).map(
+export const widthSizeList = Array.from({ length: 111 }, () => 0).map(
+  (_, index) => {
+    return {
+      id: index + 1,
+      val: index + 10,
+    };
+  },
+);
+export const lengthSizeList = Array.from({ length: 181 }, () => 0).map(
   (_, index) => {
     return {
       id: index + 1,
@@ -102,15 +110,7 @@ export const widthSizeList = Array.from({ length: 61 }, () => 0).map(
     };
   },
 );
-export const lengthSizeList = Array.from({ length: 131 }, () => 0).map(
-  (_, index) => {
-    return {
-      id: index + 1,
-      val: index + 20,
-    };
-  },
-);
-export const eaveHeightSizeList = Array.from({ length: 17 }, () => 0).map(
+export const eaveHeightSizeList = Array.from({ length: 9 }, () => 0).map(
   (_, index) => {
     return {
       id: index + 1,

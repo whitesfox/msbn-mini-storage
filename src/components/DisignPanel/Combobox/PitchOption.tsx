@@ -20,11 +20,11 @@ interface PitchOptionProps {
   setValue?: (val: any, type?: string, index?: number) => void;
 }
 
-const pitchOptionSizeList = Array.from({ length: 8 }, () => 0).map(
+const pitchOptionSizeList = Array.from({ length: 6 }, () => 0).map(
   (_, index) => {
     return {
       id: index + 1,
-      val: `${index + 1} / 12`,
+      val: `${index / 2 + 0.5} / 12`,
     };
   },
 );
