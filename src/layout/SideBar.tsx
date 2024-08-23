@@ -1535,37 +1535,6 @@ export const SideBar = () => {
               mainKey={"chooseyoursize"}
               typePitch="roofpitch"
             />
-            <ForSelectItem
-              ItemNameTitle="Inset bay"
-              costCalculation={costCalculation}
-              itemStatus={insetbay}
-              setItemStatus={setInsetBay}
-              itemName="insetbay"
-              itemValue={"Select to inset bay"}
-              mainKey="chooseyoursize"
-              index={0}
-            />
-            <div className={`${insetbay ? "block" : "hidden"}`}>
-              <SizeComboboxPanel
-                panelName="Inset bay length"
-                dataList={InsetBayLengthList}
-                valueProps={bayLength}
-                setValue={setBayLength}
-                type="insetbaylength"
-                costCalculation={costCalculation}
-                mainKey={"chooseyoursize"}
-              />
-            </div>
-            <ForSelectItem
-              ItemNameTitle="Roof only"
-              costCalculation={costCalculation}
-              itemStatus={roofonly}
-              setItemStatus={setRoofOnly}
-              itemName="roofonly"
-              itemValue={"Select to remove all walls"}
-              mainKey="chooseyoursize"
-              index={0}
-            />
           </div>
           <div className=" ">
             <h3 className="mb-[0.3rem] mt-4 px-0 pb-[7px] pt-px text-2xl font-light leading-10">
