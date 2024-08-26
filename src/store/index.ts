@@ -442,6 +442,22 @@ export const useAddLeanToMultiple = create<UpgradeAddLeanTo>((set) => ({
     set((state) => ({ ...state, multipleLeanTo: value })),
 }));
 
+interface IAddRecess {
+  multipleRecess: { [key: number]: number | string };
+  multipleRecessOpenStatus: { [key: number]: boolean };
+  setMultipleRecessOpenStatus: (value: { [key: number]: boolean }) => void;
+  setMultipleRecess: (value: { [key: number]: number | string }) => void;
+}
+
+export const useAddMultipleRecess = create<IAddRecess>((set) => ({
+  multipleRecess: {},
+  multipleRecessOpenStatus: {},
+  setMultipleRecessOpenStatus: (value) =>
+    set((state) => ({ ...state, multipleRecessOpenStatus: value })),
+  setMultipleRecess: (value) =>
+    set((state) => ({ ...state, multipleRecess: value })),
+}));
+
 interface ZoomInOutProps {
   zoomAvailable: boolean;
   setZoomAvailable: (value: boolean) => void;

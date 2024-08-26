@@ -119,6 +119,15 @@ export const eaveHeightSizeList = Array.from({ length: 9 }, () => 0).map(
   },
 );
 
+export const recessCeilingHeight = Array.from({ length: 4 }, () => 0).map(
+  (_, index) => {
+    return {
+      id: index + 1,
+      val: index + 7,
+    };
+  },
+);
+
 export const doorBuildingList = () => {
   const { leanToState } = useLeanTo();
   const listArray: TdataList[] = [];
