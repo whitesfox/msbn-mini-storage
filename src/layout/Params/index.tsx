@@ -32,15 +32,7 @@ export const Params = () => {
     setGableOverhang,
   } = useStoreSize();
   const { label, setStyle } = useStyle();
-  const {
-    insetbay,
-    roofonly,
-    setInsetBay,
-    setRoofOnly,
-    setdownspout,
-    setWainscot,
-    setLinerPanels,
-  } = useUpgrade();
+  const { setdownspout } = useUpgrade();
   const { updateLeanToData, addLeanToState, addLeanToInsetBay } = useLeanTo();
   const { setMultipleLeanTo, setMultipleLeanToOpenStatus } =
     useAddLeanToMultiple();
@@ -99,23 +91,10 @@ export const Params = () => {
           id: mainBuildingDeltaHeight,
           val: mainBuildingPitchOptionSize,
         });
-      if (insetbay !== mainBuildingInsetBay) {
-        setInsetBay(mainBuildingInsetBay);
-        setBayLength(mainBuildingInsetBayLength);
-      }
-      if (roofonly !== mainBuildingRoofOnly) setRoofOnly(mainBuildingRoofOnly);
-
-      //Liner panels
-      const linerPanels =
-        String(searchParams.get("lp")) === "false" ? false : true;
-      setLinerPanels(linerPanels);
 
       //wainscot and downspout
-      const wainscoutState =
-        String(searchParams.get("ws")) === "false" ? false : true;
       const downspoutState =
         String(searchParams.get("ds")) === "false" ? false : true;
-      setWainscot(wainscoutState);
       setdownspout(downspoutState);
 
       //Lean-to

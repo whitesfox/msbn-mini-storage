@@ -21,9 +21,7 @@ interface IDoor {
 interface IEndWall {
   name: string;
   sideWallColor: string;
-  wainscotColor: string;
   modelShape: THREE.Shape;
-  wainscotModel: THREE.Shape;
   objData: Array<IDoor>;
   pos: [number, number, number];
   rot: [number, number, number];
@@ -32,9 +30,7 @@ interface IEndWall {
 export const EndWall = ({
   name,
   sideWallColor,
-  wainscotColor,
   modelShape,
-  wainscotModel,
   objData,
   pos,
   rot,
@@ -64,27 +60,6 @@ export const EndWall = ({
         </Geometry>
         <PatternBumpMaterial
           color={sideWallColor}
-          rotation={-Math.PI / 2}
-        />
-      </mesh>
-
-      <mesh>
-        <Geometry>
-          <Addition>
-            <extrudeGeometry args={[wainscotModel, ExtrudeSettings]} />
-          </Addition>
-          {objData.map((item) => (
-            <SliceDoor
-              pos={[item.pos[0], item.pos[1], 0]}
-              rot={item.rot}
-              key={item.key}
-              size={item.size}
-              index={item.key}
-            />
-          ))}
-        </Geometry>
-        <PatternBumpMaterial
-          color={wainscotColor}
           rotation={-Math.PI / 2}
         />
       </mesh>

@@ -10,15 +10,10 @@ type ColorComboProps = {
     mainKey: string,
     booleanTypeOption?: boolean,
   ) => void;
-  wainscot: boolean;
   downspout: boolean;
 };
 
-const ColorCombo = ({
-  costCalculation,
-  wainscot,
-  downspout,
-}: ColorComboProps) => {
+const ColorCombo = ({ costCalculation, downspout }: ColorComboProps) => {
   const {
     roofColorLabel,
     roofTrimColorLabel,
@@ -83,17 +78,6 @@ const ColorCombo = ({
         costCalculation={costCalculation}
         mainKey="chooseyourcolors"
       />
-      {wainscot && (
-        <ColorComboboxPanel
-          panelName="Wainscot"
-          dataList={colorSetting}
-          valueProps={wainscotColorLabel}
-          setValue={setWainscotColor}
-          type="wainscot"
-          costCalculation={costCalculation}
-          mainKey="chooseyourcolors"
-        />
-      )}
       {downspout && (
         <ColorComboboxPanel
           panelName="Downspout"

@@ -31,7 +31,6 @@ export const SingleSlopeTrimGroup = ({
   lEaveHeight,
   lDeltaHeight,
 }: ISingleSlopeTrimGroup) => {
-  const { roofonly } = useUpgrade();
   const { sliceDoorData } = useDoorStore();
   const { width, length, overhangEave, overhangPurlin, bayLength } =
     useStoreSize();
@@ -171,7 +170,6 @@ export const SingleSlopeTrimGroup = ({
         name="OutsideCornerTrim"
         castShadow
         receiveShadow
-        visible={roofonly ? false : true}
       >
         <OutsideCornerTrim
           count={1}
@@ -298,7 +296,6 @@ export const SingleSlopeTrimGroup = ({
           position={[-width / 2, 0, 0]}
           receiveShadow
           castShadow
-          visible={roofonly ? false : true}
         >
           {baseTrimList.map((item, index) => (
             <BaseTrim

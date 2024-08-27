@@ -25,7 +25,6 @@ export const LeanToRidigFrameGroup = ({
 }: ILeanToRigidFrameGroup) => {
   const { basicLength, bayLength } = useStoreSize();
   const { rigidFrameData, insetRigidFrameData } = useRigidFrameStore();
-  const { roofonly } = useUpgrade();
 
   const LeanToRigidFrameData = useMemo(() => {
     const frameData: number[] = [];
@@ -123,7 +122,7 @@ export const LeanToRidigFrameGroup = ({
             lWidth={lWidth}
             lEaveHeight={lEaveHeight}
             lDeltaHeight={lDeltaHeight}
-            increaseLength={roofonly ? 0.6 : 0.6}
+            increaseLength={0.6}
           />
         ))}
       {wall === "SideWallRight" &&
@@ -134,7 +133,7 @@ export const LeanToRidigFrameGroup = ({
             lWidth={lWidth}
             lEaveHeight={lEaveHeight}
             lDeltaHeight={lDeltaHeight}
-            increaseLength={roofonly ? 0.6 : 0.6}
+            increaseLength={0.6}
           />
         ))}
     </group>

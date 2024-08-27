@@ -24,7 +24,6 @@ interface ISideWall {
   name: string;
   eaveHeight: number;
   basicLength: number;
-  wainscotHeight: number;
   sideWallColor: string;
   wainscotColor: string;
   modelShape: THREE.Shape;
@@ -38,7 +37,6 @@ export const SideWall = ({
   name,
   eaveHeight,
   basicLength,
-  wainscotHeight,
   sideWallColor,
   wainscotColor,
   modelShape,
@@ -47,11 +45,9 @@ export const SideWall = ({
   rot,
 }: ISideWall) => {
   const mainMaterialRef = useRef<any>();
-  const wainScotMaterialRef = useRef<any>();
 
   useFrame((_state, delta) => {
     easing.dampC(mainMaterialRef.current.color, sideWallColor, 0.2, delta);
-    easing.dampC(wainScotMaterialRef.current.color, wainscotColor, 0.2, delta);
   });
 
   return (
@@ -62,49 +58,6 @@ export const SideWall = ({
       castShadow
       receiveShadow
     >
-      <mesh position={[0, 0, wainscotHeight]}>
-        <Geometry>
-          <Addition>
-            <extrudeGeometry
-              args={[
-                modelShape,
-                {
-                  ...ExtrudeSettings,
-                  depth: eaveHeight - wainscotHeight,
-                },
-              ]}
-            />
-          </Addition>
-          {objData.map((item, index) => (
-            <SliceDoor
-              pos={
-                flag
-                  ? [
-                      item.pos[2] + basicLength / 2,
-                      0,
-                      item.pos[1] - wainscotHeight,
-                    ]
-                  : [
-                      -item.pos[2] + basicLength / 2,
-                      0,
-                      item.pos[1] - wainscotHeight,
-                    ]
-              }
-              rot={[Math.PI / 2, 0, 0]}
-              index={item.key}
-              size={[item.size[0], item.size[1], item.size[2] + 0.1]}
-              key={index}
-            />
-          ))}
-        </Geometry>
-
-        <meshPhysicalMaterial
-          side={THREE.FrontSide}
-          metalness={0.7}
-          roughness={0.5}
-          ref={mainMaterialRef}
-        />
-      </mesh>
       <mesh>
         <Geometry>
           <Addition>
@@ -113,7 +66,7 @@ export const SideWall = ({
                 modelShape,
                 {
                   ...ExtrudeSettings,
-                  depth: wainscotHeight,
+                  depth: eaveHeight,
                 },
               ]}
             />
@@ -132,11 +85,12 @@ export const SideWall = ({
             />
           ))}
         </Geometry>
+
         <meshPhysicalMaterial
           side={THREE.FrontSide}
           metalness={0.7}
           roughness={0.5}
-          ref={wainScotMaterialRef}
+          ref={mainMaterialRef}
         />
       </mesh>
     </mesh>

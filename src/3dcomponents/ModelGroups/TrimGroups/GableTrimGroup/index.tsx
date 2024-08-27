@@ -21,7 +21,6 @@ export const GableTrimGroup = () => {
   } = useStoreSize();
 
   const { sliceDoorData } = useDoorStore();
-  const { roofonly } = useUpgrade();
 
   const data = useMemo(() => {
     const trLength =
@@ -170,7 +169,6 @@ export const GableTrimGroup = () => {
         name="OutsideCornerTrim"
         castShadow
         receiveShadow
-        visible={roofonly ? false : true}
       >
         <OutsideCornerTrim
           count={1}
@@ -350,7 +348,6 @@ export const GableTrimGroup = () => {
         <group
           receiveShadow
           castShadow
-          visible={roofonly ? false : true}
         >
           {baseTrimList.map((item, index) => (
             <BaseTrim

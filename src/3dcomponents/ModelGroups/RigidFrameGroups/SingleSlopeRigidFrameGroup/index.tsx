@@ -22,7 +22,6 @@ export const SingleSlopeRigidFrameGroup = ({
   lPos,
 }: ISingleSlopeRigidFrameGroup) => {
   const { bayLength } = useStoreSize();
-  const { insetbay } = useUpgrade();
   const { addRigidFrameData, addInsetRigidFrameData } = useRigidFrameStore();
 
   const singleSlopeRigidFrameData = useMemo(() => {
@@ -68,19 +67,6 @@ export const SingleSlopeRigidFrameGroup = ({
 
     const insetRigidFramePos: IRigidFrame[] = [];
 
-    if (insetbay) {
-      singleSlopeRigidFrameData.insetBayRigidFrameCount.map((_item, index) => {
-        insetRigidFramePos.push({
-          pos: [
-            lPos[0],
-            lPos[1],
-            -lLength / 2 +
-              0.5 +
-              index * singleSlopeRigidFrameData.insetBayRigidFrameInterval,
-          ],
-        });
-      });
-    }
     addInsetRigidFrameData(insetRigidFramePos);
   }, [
     lLength,
@@ -108,7 +94,6 @@ export const SingleSlopeRigidFrameGroup = ({
       ))}
       {/* insetBay rigidFrames */}
       <group
-        visible={insetbay ? true : false}
         position={[
           0,
           0,

@@ -289,36 +289,13 @@ export const useStyle = create<StyleProps>((set) => ({
 }));
 
 interface UpgradeProps {
-  insetbay: boolean;
-  roofonly: boolean;
-  wainscot: boolean;
   downspout: boolean;
-  linerPanels: boolean;
-  wainscotHeight: number;
-  setRoofOnly: (value: boolean) => void;
-  setWainscot: (value: boolean) => void;
-  setInsetBay: (value: boolean) => void;
   setdownspout: (value: boolean) => void;
-  setLinerPanels: (value: boolean) => void;
 }
 
 export const useUpgrade = create<UpgradeProps>((set) => ({
-  wainscot: false,
   downspout: false,
-  insetbay: false,
-  roofonly: false,
-  linerPanels: false,
-  wainscotHeight: 0,
-  setWainscot: (value) =>
-    set((state) => ({
-      ...state,
-      wainscot: value,
-      wainscotHeight: value ? 3 : 0,
-    })),
   setdownspout: (value) => set((state) => ({ ...state, downspout: value })),
-  setInsetBay: (value) => set((state) => ({ ...state, insetbay: value })),
-  setRoofOnly: (value) => set((state) => ({ ...state, roofonly: value })),
-  setLinerPanels: (value) => set((state) => ({ ...state, linerPanels: value })),
 }));
 
 interface PlacementForWindowDoor {

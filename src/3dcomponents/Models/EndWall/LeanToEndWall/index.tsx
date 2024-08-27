@@ -29,33 +29,20 @@ export const LeanToEndWall = ({
   lDeltaHeight,
   lInsetBayLength,
 }: ILeanToEndWall) => {
-  const { wainscotHeight } = useUpgrade();
   const { sideWallColor, wainscotColor } = useStoreColor();
   const { sliceDoorData } = useDoorStore();
 
   const model = useMemo(() => {
     const modelShape = new THREE.Shape();
 
-    modelShape.moveTo(-lWidth, wainscotHeight);
-    modelShape.lineTo(0, wainscotHeight);
+    modelShape.moveTo(-lWidth, 0);
+    modelShape.lineTo(0, 0);
     modelShape.lineTo(0, lEaveHeight + lDeltaHeight);
     modelShape.lineTo(-lWidth, lEaveHeight);
     modelShape.closePath();
 
     return modelShape;
-  }, [lWidth, lEaveHeight, lDeltaHeight, wainscotHeight]);
-
-  const wainscotModel = useMemo(() => {
-    const modelShape = new THREE.Shape();
-
-    modelShape.moveTo(-lWidth, 0);
-    modelShape.lineTo(0, 0);
-    modelShape.lineTo(0, wainscotHeight);
-    modelShape.lineTo(-lWidth, wainscotHeight);
-    modelShape.closePath();
-
-    return modelShape;
-  }, [lWidth, wainscotHeight]);
+  }, [lWidth, lEaveHeight, lDeltaHeight]);
 
   const objData = sliceDoorData.filter((item) => {
     if (wall === "EndWallFront") {
@@ -94,9 +81,7 @@ export const LeanToEndWall = ({
         lWidth={lWidth}
         lLength={lLength}
         sideWallColor={sideWallColor}
-        wainscotColor={wainscotColor}
         modelShape={model}
-        wainscotModel={wainscotModel}
         objData={objData}
         pos={
           wall === "SideWallLeft"

@@ -27,7 +27,7 @@ export const DownspoutExtrude = ({
   endOfInsetBay,
 }: IDownspout) => {
   const downspoutRef = useRef<any>();
-  const { roofonly, downspout } = useUpgrade();
+  const { downspout } = useUpgrade();
   const downspoutVisible = useRef(true);
   const { leanToData } = useLeanTo();
   const { bayLength, overhangEave, leanToDropHeightSize } = useStoreSize();
@@ -160,11 +160,9 @@ export const DownspoutExtrude = ({
                 downspoutModel,
                 {
                   ...extrudeSetting,
-                  depth: roofonly
-                    ? -overhangEave - 0.4 + 0.5 * Math.sin(roofSlopeAngle)
-                    : endOfInsetBay
-                      ? -overhangEave - 0.5
-                      : -overhangEave + 0.2,
+                  depth: endOfInsetBay
+                    ? -overhangEave - 0.5
+                    : -overhangEave + 0.2,
                 },
               ]}
             />
@@ -179,15 +177,9 @@ export const DownspoutExtrude = ({
           {/* top spout */}
           <mesh
             position={
-              roofonly
-                ? [
-                    downspoutMainHeight - 1.337,
-                    0,
-                    -overhangEave - 0.55 + 0.5 * Math.sin(roofSlopeAngle),
-                  ]
-                : endOfInsetBay
-                  ? [downspoutMainHeight - 1.337, 0, -overhangEave - 0.4]
-                  : [downspoutMainHeight - 1.337, 0, -overhangEave + 0.1]
+              endOfInsetBay
+                ? [downspoutMainHeight - 1.337, 0, -overhangEave - 0.4]
+                : [downspoutMainHeight - 1.337, 0, -overhangEave + 0.1]
             }
             rotation={[0, Math.PI / 2, 0]}
           >

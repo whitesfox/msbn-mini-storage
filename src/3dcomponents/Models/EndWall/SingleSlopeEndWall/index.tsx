@@ -22,7 +22,6 @@ export const SingleSlopeEndWall = ({
   basicLength,
 }: ISingleSlopeEndWall) => {
   const { sliceDoorData } = useDoorStore();
-  const { roofonly, wainscotHeight } = useUpgrade();
   const { sideWallColor, wainscotColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
@@ -37,39 +36,24 @@ export const SingleSlopeEndWall = ({
   const model = useMemo(() => {
     const modelShape = new THREE.Shape();
 
-    modelShape.moveTo(-width / 2, wainscotHeight);
+    modelShape.moveTo(-width / 2, 0);
     modelShape.lineTo(-width / 2, eaveHeight);
     modelShape.lineTo(width / 2, eaveHeight + deltaHeight);
-    modelShape.lineTo(width / 2, wainscotHeight);
-    modelShape.closePath();
-
-    return modelShape;
-  }, [width, eaveHeight, deltaHeight, wainscotHeight]);
-
-  const wainscotModel = useMemo(() => {
-    const modelShape = new THREE.Shape();
-
-    modelShape.moveTo(-width / 2, 0);
-    modelShape.lineTo(-width / 2, wainscotHeight);
-    modelShape.lineTo(width / 2, wainscotHeight);
     modelShape.lineTo(width / 2, 0);
     modelShape.closePath();
 
     return modelShape;
-  }, [width, wainscotHeight]);
+  }, [width, eaveHeight, deltaHeight]);
 
   return (
     <group
       castShadow
       receiveShadow
-      visible={roofonly ? false : true}
     >
       <EndWall
         name={flag ? "EndWallGabelFront" : "EndWallGabelBack"}
         sideWallColor={sideWallColor}
-        wainscotColor={wainscotColor}
         modelShape={model}
-        wainscotModel={wainscotModel}
         objData={objData}
         pos={
           flag

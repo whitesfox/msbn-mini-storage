@@ -7,7 +7,6 @@ import { useStoreSize, useUpgrade } from "store";
 import { GableRigidFrameExtrude } from "3dcomponents/Models/RigidFrame/RigidFrameExtrudes/GableRigidFrameExtrude";
 
 export const GableRigidFrameGroup = () => {
-  const { insetbay } = useUpgrade();
   const { basicLength, bayLength } = useStoreSize();
   const { addRigidFrameData, addInsetRigidFrameData } = useRigidFrameStore();
 
@@ -50,23 +49,6 @@ export const GableRigidFrameGroup = () => {
       });
     });
     addRigidFrameData(rigidFramePos);
-
-    const insetRigidFramePos: IRigidFrame[] = [];
-
-    if (insetbay) {
-      RigidFrameData.insetBayRigidFrame.map((_item, index) => {
-        insetRigidFramePos.push({
-          pos: [
-            0,
-            0,
-            -bayLength / 2 +
-              0.5 +
-              index * RigidFrameData.insetBayRigidFrameInterval,
-          ],
-        });
-      });
-    }
-    addInsetRigidFrameData(insetRigidFramePos);
   }, [
     basicLength,
     RigidFrameData.gableRigidFrame,
@@ -90,7 +72,6 @@ export const GableRigidFrameGroup = () => {
       ))}
       {/* inset bay rigid frame */}
       <group
-        visible={insetbay ? true : false}
         position={[
           0,
           0,

@@ -30,7 +30,6 @@ export const LeanToSideWall = ({
   lInsetBayLength,
   lPos,
 }: ILeanToSideWall) => {
-  const { wainscotHeight } = useUpgrade();
   const { sliceDoorData } = useDoorStore();
   const { width, deltaHeight, basicLength } = useStoreSize();
   const { sideWallColor, wainscotColor } = useStoreColor();
@@ -110,7 +109,6 @@ export const LeanToSideWall = ({
         eaveHeight={lEaveHeight}
         lLength={lLength}
         width={width}
-        wainscotHeight={wainscotHeight}
         sideWallColor={sideWallColor}
         wainscotColor={wainscotColor}
         modelShape={model}

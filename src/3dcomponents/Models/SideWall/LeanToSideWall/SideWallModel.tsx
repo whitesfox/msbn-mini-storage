@@ -27,7 +27,6 @@ interface ISideWall {
   eaveHeight: number;
   lLength: number;
   width: number;
-  wainscotHeight: number;
   sideWallColor: string;
   wainscotColor: string;
   modelShape: THREE.Shape;
@@ -43,7 +42,6 @@ export const SideWallModel = ({
   eaveHeight,
   lLength,
   width,
-  wainscotHeight,
   sideWallColor,
   wainscotColor,
   modelShape,
@@ -69,7 +67,7 @@ export const SideWallModel = ({
       castShadow
       receiveShadow
     >
-      <mesh position={[0, 0, wainscotHeight]}>
+      <mesh>
         <Geometry>
           <Addition>
             <extrudeGeometry
@@ -77,7 +75,7 @@ export const SideWallModel = ({
                 modelShape,
                 {
                   ...ExtrudeSettings,
-                  depth: eaveHeight - wainscotHeight,
+                  depth: eaveHeight,
                 },
               ]}
             />
@@ -90,7 +88,7 @@ export const SideWallModel = ({
                 position={[
                   -item.pos[0] + lLength / 2 + lPos[0],
                   0,
-                  item.pos[1] - wainscotHeight,
+                  item.pos[1],
                 ]}
                 rotation={[Math.PI / 2, 0, 0]}
               >
@@ -104,11 +102,7 @@ export const SideWallModel = ({
             item.wall === "EndWallGabelBack" ? (
               <Subtraction
                 key={index}
-                position={[
-                  item.pos[0] + lLength / 2 - lPos[0],
-                  0,
-                  item.pos[1] - wainscotHeight,
-                ]}
+                position={[item.pos[0] + lLength / 2 - lPos[0], 0, item.pos[1]]}
                 rotation={[Math.PI / 2, 0, 0]}
               >
                 <boxGeometry
@@ -124,7 +118,7 @@ export const SideWallModel = ({
                 position={[
                   -item.pos[2] + lPos[2] + lLength / 2 + bayLength / 2,
                   0,
-                  item.pos[1] - wainscotHeight,
+                  item.pos[1],
                 ]}
                 rotation={[Math.PI / 2, 0, 0]}
               >
@@ -141,7 +135,7 @@ export const SideWallModel = ({
                 position={[
                   item.pos[2] + lLength / 2 - lPos[2] - bayLength / 2,
                   0,
-                  item.pos[1] - wainscotHeight,
+                  item.pos[1],
                 ]}
                 rotation={[Math.PI / 2, 0, 0]}
               >
@@ -158,87 +152,6 @@ export const SideWallModel = ({
           metalness={0.7}
           roughness={0.5}
           ref={mainMaterialRef}
-        />
-      </mesh>
-      <mesh>
-        <Geometry>
-          <Addition>
-            <extrudeGeometry
-              args={[
-                modelShape,
-                {
-                  ...ExtrudeSettings,
-                  depth: wainscotHeight,
-                },
-              ]}
-            />
-          </Addition>
-          {objData.map((item, index) =>
-            item.wall === "EndWallGabelFront" ? (
-              <Subtraction
-                key={index}
-                position={[-item.pos[0] + lLength / 2, 0, item.pos[1]]}
-                rotation={[Math.PI / 2, 0, 0]}
-              >
-                <boxGeometry
-                  args={[item.size[0], item.size[1], item.size[2] + 0.4]}
-                />
-              </Subtraction>
-            ) : null,
-          )}
-          {objData.map((item, index) =>
-            item.wall === "EndWallGabelBack" ? (
-              <Subtraction
-                key={index}
-                position={[item.pos[0] + lLength / 2, 0, item.pos[1]]}
-                rotation={[Math.PI / 2, 0, 0]}
-              >
-                <boxGeometry
-                  args={[item.size[0], item.size[1], item.size[2] + 0.4]}
-                />
-              </Subtraction>
-            ) : null,
-          )}
-          {objData.map((item, index) =>
-            item.wall === "SideWallLeft" ? (
-              <Subtraction
-                key={index}
-                position={[
-                  -item.pos[2] + lPos[2] + lLength / 2 + bayLength / 2,
-                  0,
-                  item.pos[1] - wainscotHeight,
-                ]}
-                rotation={[Math.PI / 2, 0, 0]}
-              >
-                <boxGeometry
-                  args={[item.size[0], item.size[1], item.size[2] + 0.4]}
-                />
-              </Subtraction>
-            ) : null,
-          )}
-          {objData.map((item, index) =>
-            item.wall === "SideWallRight" ? (
-              <Subtraction
-                key={index}
-                position={[
-                  item.pos[2] + lLength / 2 - lPos[2] - bayLength / 2,
-                  0,
-                  item.pos[1] - wainscotHeight,
-                ]}
-                rotation={[Math.PI / 2, 0, 0]}
-              >
-                <boxGeometry
-                  args={[item.size[0], item.size[1], item.size[2] + 0.4]}
-                />
-              </Subtraction>
-            ) : null,
-          )}
-        </Geometry>
-        <meshPhysicalMaterial
-          side={THREE.FrontSide}
-          metalness={0.7}
-          roughness={0.5}
-          ref={wainScotMaterialRef}
         />
       </mesh>
     </mesh>

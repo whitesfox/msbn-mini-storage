@@ -26,7 +26,7 @@ import ViewDesignButton from "components/ViewDesignButton";
 export const SideBar = () => {
   const { label } = useStyle();
   const { leanToData, updateLeanToData } = useLeanTo();
-  const { downspout, wainscot, setdownspout, setWainscot } = useUpgrade();
+  const { downspout, setdownspout } = useUpgrade();
   const { placement } = usePlacement();
   const { setZoomAvailable } = useZoomInOrOut();
   const {
@@ -591,25 +591,28 @@ export const SideBar = () => {
               Optional upgrades
             </h3>
             <ForSelectItem
-              ItemNameTitle="Wainscot"
-              costCalculation={costCalculation}
-              itemStatus={wainscot}
-              setItemStatus={setWainscot}
-              itemName="wainscot"
-              // itemValue={"8' exterior wainscot".replace(/'/g, "\u2019")}
-              itemValue={"Select to add 3' wainscot"}
               mainKey="optionalupgrades"
-              index={0}
-            />
-            <ForSelectItem
               ItemNameTitle="Gutters"
-              costCalculation={costCalculation}
+              itemValue={"Select to add gutters and downspouts"}
               itemStatus={downspout}
               setItemStatus={setdownspout}
-              itemName="gutters"
-              itemValue={"Select to add gutters and downspouts"}
+              costCalculation={costCalculation}
+            />
+            <ForSelectItem
               mainKey="optionalupgrades"
-              index={0}
+              ItemNameTitle="Standing seam roof"
+              itemValue={"Select to upgrade to a standing seam roof"}
+              itemStatus={downspout}
+              setItemStatus={setdownspout}
+              costCalculation={costCalculation}
+            />
+            <ForSelectItem
+              mainKey="optionalupgrades"
+              ItemNameTitle="Insulation"
+              itemValue={""}
+              itemStatus={downspout}
+              setItemStatus={setdownspout}
+              costCalculation={costCalculation}
             />
           </div>
           <div>
@@ -618,7 +621,6 @@ export const SideBar = () => {
             </h3>
             <ColorCombo
               costCalculation={costCalculation}
-              wainscot={wainscot}
               downspout={downspout}
             />
           </div>

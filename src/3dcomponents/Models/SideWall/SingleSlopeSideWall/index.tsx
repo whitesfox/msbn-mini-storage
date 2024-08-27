@@ -21,7 +21,6 @@ export const SingleSlopeSideWall = ({
   basicLength,
 }: ISingleSlopeSideWall) => {
   const { sliceDoorData } = useDoorStore();
-  const { roofonly, wainscotHeight } = useUpgrade();
   const { sideWallColor, wainscotColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
@@ -58,14 +57,12 @@ export const SingleSlopeSideWall = ({
     <group
       castShadow
       receiveShadow
-      visible={roofonly ? false : true}
     >
       <SideWall
         flag={flag}
         name={flag ? "SideWallRight" : "SideWallLeft"}
         eaveHeight={eaveHeight}
         basicLength={basicLength}
-        wainscotHeight={wainscotHeight}
         sideWallColor={sideWallColor}
         wainscotColor={wainscotColor}
         modelShape={model}

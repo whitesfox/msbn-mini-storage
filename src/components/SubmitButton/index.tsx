@@ -19,7 +19,7 @@ export const SubmitButton = () => {
     overhangEave,
     overhangPurlin,
   } = useStoreSize();
-  const { roofonly, insetbay, linerPanels, wainscot, downspout } = useUpgrade();
+  const { downspout } = useUpgrade();
   const { label } = useStyle();
   const { leanToData } = useLeanTo();
   const {
@@ -59,23 +59,9 @@ export const SubmitButton = () => {
     paramsContent += "&mbi=";
     paramsContent += pitchOptionSize;
     paramsContent += "&mbi=";
-    if (insetbay) paramsContent += "true";
-    else paramsContent += "false";
     paramsContent += "&mbi=";
     paramsContent += bayLength;
     paramsContent += "&mbi=";
-    if (roofonly) paramsContent += "true";
-    else paramsContent += "false";
-
-    //Liner panels
-    paramsContent += "&lp=";
-    if (linerPanels) paramsContent += "true";
-    else paramsContent += "false";
-
-    //Wainscout
-    paramsContent += "&ws=";
-    if (wainscot) paramsContent += "true";
-    else paramsContent += "false";
 
     //Downspout
     paramsContent += "&ds=";

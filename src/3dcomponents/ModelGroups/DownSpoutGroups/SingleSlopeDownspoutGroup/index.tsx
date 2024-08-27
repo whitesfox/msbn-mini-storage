@@ -8,7 +8,6 @@ import { DownspoutExtrude } from "3dcomponents/Models/Downspout/DownspoutExtrude
 export const SingleSlopeDownspoutGroup = () => {
   const { width, eaveHeight, bayLength, basicLength, deltaHeight } =
     useStoreSize();
-  const { roofonly, insetbay } = useUpgrade();
 
   //Calculate main downspouts count
   const mainDownspoutCount = useMemo(() => {
@@ -61,29 +60,18 @@ export const SingleSlopeDownspoutGroup = () => {
     const posArray: [number, number, number][] = [];
 
     insetBayDownspoutCount.map((_item, index) => {
-      posArray.push(
-        roofonly
-          ? [
-              -(width / 2 - 5 / 15) + 0.5,
-              0.3,
-              index * insetBayRigidFrameInterval +
-                basicLength / 2 +
-                insetBayRigidFrameInterval +
-                0.5,
-            ]
-          : [
-              -(width / 2 + 3 / 15) + 0.5,
-              0.3,
-              index * insetBayRigidFrameInterval +
-                basicLength / 2 +
-                insetBayRigidFrameInterval +
-                0.5,
-            ],
-      );
+      posArray.push([
+        -(width / 2 + 3 / 15) + 0.5,
+        0.3,
+        index * insetBayRigidFrameInterval +
+          basicLength / 2 +
+          insetBayRigidFrameInterval +
+          0.5,
+      ]);
     });
 
     return posArray;
-  }, [bayLength, width, roofonly, insetBayDownspoutCount]);
+  }, [bayLength, width, insetBayDownspoutCount]);
 
   return (
     <group>
@@ -103,7 +91,7 @@ export const SingleSlopeDownspoutGroup = () => {
       {insetBayDownspoutPos.map((item, index) => (
         <group
           key={index}
-          visible={insetbay ? true : false}
+          visible={false}
         >
           <DownspoutExtrude
             pos={item}

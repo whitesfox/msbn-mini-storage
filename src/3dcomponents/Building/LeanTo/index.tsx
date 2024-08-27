@@ -36,7 +36,6 @@ export const LeanTo = ({
   lRot,
 }: ILeanTo) => {
   const { label } = useStyle();
-  const { insetbay, roofonly } = useUpgrade();
   const { doorData, doorCount, updateDoorData } = useDoorStore();
   const { leanToData, updateLeanToData } = useLeanTo();
   const { placement } = usePlacement();
@@ -78,325 +77,178 @@ export const LeanTo = ({
       });
 
     if (label === "Single Slope") {
-      if (roofonly) {
-        updateLeanToData({
-          wall: "EndWallFront",
-          type: leanToData[0].type,
-          lWidth: leanToData[0].lWidth,
-          lLength: leanToData[0].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
-          lDeltaHeight: leanToDeltaHeight[0].val,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: [
-            leanToData[0].lPos[0],
-            leanToData[0].lPos[1],
-            leanToData[0].lPos[2],
-          ],
-          lRot: [
-            leanToData[0].lRot[0],
-            leanToData[0].lRot[1],
-            leanToData[0].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "EndWallBack",
-          type: leanToData[1].type,
-          lWidth: leanToData[1].lWidth,
-          lLength: leanToData[1].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
-          lDeltaHeight: leanToDeltaHeight[1].val,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: [
-            leanToData[1].lPos[0],
-            leanToData[1].lPos[1],
-            leanToData[1].lPos[2],
-          ],
-          lRot: [
-            leanToData[1].lRot[0],
-            leanToData[1].lRot[1],
-            leanToData[1].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "SideWallRight",
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth,
-          lLength: leanToData[2].lLength,
-          lEaveHeight:
-            eaveHeight +
-            deltaHeight -
-            leanToDeltaHeight[2].val -
-            leanToDropHeightSize[2].val,
-          lDeltaHeight: leanToDeltaHeight[2].val,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [width / 2 - 0.6, 0, -length / 2 + leanToData[2].lLength / 2],
-          lRot: [0, Math.PI, 0],
-        });
-        updateLeanToData({
-          wall: "SideWallLeft",
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[3].val - leanToDropHeightSize[3].val,
-          lDeltaHeight: leanToDeltaHeight[3].val,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [-width / 2 + 0.6, 0, -length / 2 + leanToData[3].lLength / 2],
-          lRot: [0, 0, 0],
-        });
-      } else {
-        updateLeanToData({
-          wall: "EndWallFront",
-          type: leanToData[0].type,
-          lWidth: leanToData[0].lWidth,
-          lLength: leanToData[0].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
-          lDeltaHeight: leanToDeltaHeight[0].val,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: [
-            leanToData[0].lPos[0],
-            leanToData[0].lPos[1],
-            leanToData[0].lPos[2],
-          ],
-          lRot: [
-            leanToData[0].lRot[0],
-            leanToData[0].lRot[1],
-            leanToData[0].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "EndWallBack",
-          type: leanToData[1].type,
-          lWidth: leanToData[1].lWidth,
-          lLength: leanToData[1].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
-          lDeltaHeight: leanToDeltaHeight[1].val,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: [
-            leanToData[1].lPos[0],
-            leanToData[1].lPos[1],
-            leanToData[1].lPos[2],
-          ],
-          lRot: [
-            leanToData[1].lRot[0],
-            leanToData[1].lRot[1],
-            leanToData[1].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "SideWallRight",
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth - 0.6,
-          lLength: leanToData[2].lLength,
-          lEaveHeight:
-            eaveHeight +
-            deltaHeight -
-            leanToDeltaHeight[2].val -
-            leanToDropHeightSize[2].val,
-          lDeltaHeight: leanToDeltaHeight[2].val,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [
-            leanToData[2].lPos[0],
-            leanToData[2].lPos[1],
-            leanToData[2].lPos[2],
-          ],
-          lRot: [
-            leanToData[2].lRot[0],
-            leanToData[2].lRot[1],
-            leanToData[2].lRot[2],
-          ],
-        });
+      updateLeanToData({
+        wall: "EndWallFront",
+        type: leanToData[0].type,
+        lWidth: leanToData[0].lWidth,
+        lLength: leanToData[0].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
+        lDeltaHeight: leanToDeltaHeight[0].val,
+        lInsetBayLength: leanToData[0].lInsetBayLength,
+        lPos: [
+          leanToData[0].lPos[0],
+          leanToData[0].lPos[1],
+          leanToData[0].lPos[2],
+        ],
+        lRot: [
+          leanToData[0].lRot[0],
+          leanToData[0].lRot[1],
+          leanToData[0].lRot[2],
+        ],
+      });
+      updateLeanToData({
+        wall: "EndWallBack",
+        type: leanToData[1].type,
+        lWidth: leanToData[1].lWidth,
+        lLength: leanToData[1].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
+        lDeltaHeight: leanToDeltaHeight[1].val,
+        lInsetBayLength: leanToData[1].lInsetBayLength,
+        lPos: [
+          leanToData[1].lPos[0],
+          leanToData[1].lPos[1],
+          leanToData[1].lPos[2],
+        ],
+        lRot: [
+          leanToData[1].lRot[0],
+          leanToData[1].lRot[1],
+          leanToData[1].lRot[2],
+        ],
+      });
+      updateLeanToData({
+        wall: "SideWallRight",
+        type: leanToData[2].type,
+        lWidth: leanToData[2].lWidth - 0.6,
+        lLength: leanToData[2].lLength,
+        lEaveHeight:
+          eaveHeight +
+          deltaHeight -
+          leanToDeltaHeight[2].val -
+          leanToDropHeightSize[2].val,
+        lDeltaHeight: leanToDeltaHeight[2].val,
+        lInsetBayLength: leanToData[2].lInsetBayLength,
+        lPos: [
+          leanToData[2].lPos[0],
+          leanToData[2].lPos[1],
+          leanToData[2].lPos[2],
+        ],
+        lRot: [
+          leanToData[2].lRot[0],
+          leanToData[2].lRot[1],
+          leanToData[2].lRot[2],
+        ],
+      });
 
-        updateLeanToData({
-          wall: "SideWallLeft",
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[3].val - leanToDropHeightSize[3].val,
-          lDeltaHeight: leanToDeltaHeight[3].val,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [
-            leanToData[3].lPos[0],
-            leanToData[3].lPos[1],
-            leanToData[3].lPos[2],
-          ],
-          lRot: [
-            leanToData[3].lRot[0],
-            leanToData[3].lRot[1],
-            leanToData[3].lRot[2],
-          ],
-        });
-      }
+      updateLeanToData({
+        wall: "SideWallLeft",
+        type: leanToData[3].type,
+        lWidth: leanToData[3].lWidth,
+        lLength: leanToData[3].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[3].val - leanToDropHeightSize[3].val,
+        lDeltaHeight: leanToDeltaHeight[3].val,
+        lInsetBayLength: leanToData[3].lInsetBayLength,
+        lPos: [
+          leanToData[3].lPos[0],
+          leanToData[3].lPos[1],
+          leanToData[3].lPos[2],
+        ],
+        lRot: [
+          leanToData[3].lRot[0],
+          leanToData[3].lRot[1],
+          leanToData[3].lRot[2],
+        ],
+      });
     } else if (label === "Gable") {
-      if (roofonly) {
-        updateLeanToData({
-          wall: "EndWallFront",
-          type: leanToData[0].type,
-          lWidth: leanToData[0].lWidth,
-          lLength: leanToData[0].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
-          lDeltaHeight: leanToDeltaHeight[0].val,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: [
-            leanToData[0].lPos[0],
-            leanToData[0].lPos[1],
-            leanToData[0].lPos[2],
-          ],
-          lRot: [
-            leanToData[0].lRot[0],
-            leanToData[0].lRot[1],
-            leanToData[0].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "EndWallBack",
-          type: leanToData[1].type,
-          lWidth: leanToData[1].lWidth,
-          lLength: leanToData[1].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
-          lDeltaHeight: leanToDeltaHeight[1].val,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: [
-            leanToData[1].lPos[0],
-            leanToData[1].lPos[1],
-            leanToData[1].lPos[2],
-          ],
-          lRot: [
-            leanToData[1].lRot[0],
-            leanToData[1].lRot[1],
-            leanToData[1].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "SideWallRight",
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth,
-          lLength: leanToData[2].lLength,
-          lEaveHeight:
-            eaveHeight -
-            leanToDeltaHeight[2].val -
-            leanToDropHeightSize[2].val +
-            0.13,
-          lDeltaHeight: leanToDeltaHeight[2].val,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [width / 2 - 0.6, 0, -length / 2 + leanToData[2].lLength / 2],
-          lRot: [0, Math.PI, 0],
-        });
+      updateLeanToData({
+        wall: "EndWallFront",
+        type: leanToData[0].type,
+        lWidth: leanToData[0].lWidth,
+        lLength: leanToData[0].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
+        lDeltaHeight: leanToDeltaHeight[0].val,
+        lInsetBayLength: leanToData[0].lInsetBayLength,
+        lPos: [
+          leanToData[0].lPos[0],
+          leanToData[0].lPos[1],
+          leanToData[0].lPos[2],
+        ],
+        lRot: [
+          leanToData[0].lRot[0],
+          leanToData[0].lRot[1],
+          leanToData[0].lRot[2],
+        ],
+      });
+      updateLeanToData({
+        wall: "EndWallBack",
+        type: leanToData[1].type,
+        lWidth: leanToData[1].lWidth,
+        lLength: leanToData[1].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
+        lDeltaHeight: leanToDeltaHeight[1].val,
+        lInsetBayLength: leanToData[1].lInsetBayLength,
+        lPos: [
+          leanToData[1].lPos[0],
+          leanToData[1].lPos[1],
+          leanToData[1].lPos[2],
+        ],
+        lRot: [
+          leanToData[1].lRot[0],
+          leanToData[1].lRot[1],
+          leanToData[1].lRot[2],
+        ],
+      });
+      updateLeanToData({
+        wall: "SideWallRight",
+        type: leanToData[2].type,
+        lWidth: leanToData[2].lWidth,
+        lLength: leanToData[2].lLength,
+        lEaveHeight:
+          eaveHeight -
+          leanToDeltaHeight[2].val -
+          leanToDropHeightSize[2].val +
+          0.023,
+        lDeltaHeight: leanToDeltaHeight[2].val,
+        lInsetBayLength: leanToData[2].lInsetBayLength,
+        lPos: [
+          leanToData[2].lPos[0],
+          leanToData[2].lPos[1],
+          leanToData[2].lPos[2],
+        ],
+        lRot: [
+          leanToData[2].lRot[0],
+          leanToData[2].lRot[1],
+          leanToData[2].lRot[2],
+        ],
+      });
 
-        updateLeanToData({
-          wall: "SideWallLeft",
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight:
-            eaveHeight -
-            leanToDeltaHeight[3].val -
-            leanToDropHeightSize[3].val +
-            0.13,
-          lDeltaHeight: leanToDeltaHeight[3].val,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [-width / 2 + 0.6, 0, -length / 2 + leanToData[3].lLength / 2],
-          lRot: [0, 0, 0],
-        });
-      } else {
-        updateLeanToData({
-          wall: "EndWallFront",
-          type: leanToData[0].type,
-          lWidth: leanToData[0].lWidth,
-          lLength: leanToData[0].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[0].val - leanToDropHeightSize[0].val,
-          lDeltaHeight: leanToDeltaHeight[0].val,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: [
-            leanToData[0].lPos[0],
-            leanToData[0].lPos[1],
-            leanToData[0].lPos[2],
-          ],
-          lRot: [
-            leanToData[0].lRot[0],
-            leanToData[0].lRot[1],
-            leanToData[0].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "EndWallBack",
-          type: leanToData[1].type,
-          lWidth: leanToData[1].lWidth,
-          lLength: leanToData[1].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[1].val - leanToDropHeightSize[1].val,
-          lDeltaHeight: leanToDeltaHeight[1].val,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: [
-            leanToData[1].lPos[0],
-            leanToData[1].lPos[1],
-            leanToData[1].lPos[2],
-          ],
-          lRot: [
-            leanToData[1].lRot[0],
-            leanToData[1].lRot[1],
-            leanToData[1].lRot[2],
-          ],
-        });
-        updateLeanToData({
-          wall: "SideWallRight",
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth,
-          lLength: leanToData[2].lLength,
-          lEaveHeight:
-            eaveHeight -
-            leanToDeltaHeight[2].val -
-            leanToDropHeightSize[2].val +
-            0.023,
-          lDeltaHeight: leanToDeltaHeight[2].val,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [
-            leanToData[2].lPos[0],
-            leanToData[2].lPos[1],
-            leanToData[2].lPos[2],
-          ],
-          lRot: [
-            leanToData[2].lRot[0],
-            leanToData[2].lRot[1],
-            leanToData[2].lRot[2],
-          ],
-        });
-
-        updateLeanToData({
-          wall: "SideWallLeft",
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight:
-            eaveHeight - leanToDeltaHeight[3].val - leanToDropHeightSize[3].val,
-          lDeltaHeight: leanToDeltaHeight[3].val,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [
-            leanToData[3].lPos[0],
-            leanToData[3].lPos[1],
-            leanToData[3].lPos[2],
-          ],
-          lRot: [
-            leanToData[3].lRot[0],
-            leanToData[3].lRot[1],
-            leanToData[3].lRot[2],
-          ],
-        });
-      }
+      updateLeanToData({
+        wall: "SideWallLeft",
+        type: leanToData[3].type,
+        lWidth: leanToData[3].lWidth,
+        lLength: leanToData[3].lLength,
+        lEaveHeight:
+          eaveHeight - leanToDeltaHeight[3].val - leanToDropHeightSize[3].val,
+        lDeltaHeight: leanToDeltaHeight[3].val,
+        lInsetBayLength: leanToData[3].lInsetBayLength,
+        lPos: [
+          leanToData[3].lPos[0],
+          leanToData[3].lPos[1],
+          leanToData[3].lPos[2],
+        ],
+        lRot: [
+          leanToData[3].lRot[0],
+          leanToData[3].lRot[1],
+          leanToData[3].lRot[2],
+        ],
+      });
     }
   }, [
-    roofonly,
-    insetbay,
     leanToDeltaHeight,
-    insetbay,
     bayLength,
     basicLength,
     leanToDropHeightSize,
