@@ -43,7 +43,6 @@ export const Params = () => {
     setWallTrimColor,
     setBaseTrimColor,
     setRoofTrimColor,
-    setWainscotColor,
     setDownspoutColor,
   } = useStoreColor();
   const { addDoorData, addSliceDoorData } = useDoorStore();
@@ -345,14 +344,12 @@ export const Params = () => {
       const wallTrimColorInfo = searchParams.getAll("wtc");
       const baseTrimColorInfo = searchParams.getAll("btc");
       const roofTrimColorInfo = searchParams.getAll("rtc");
-      const wainscotColorInfo = searchParams.getAll("wsc");
       const downspoutColorInfo = searchParams.getAll("dsc");
       setRoofColor("#" + roofColorInfo[0], roofColorInfo[1]);
       setSideWallColor("#" + sideWallColorInfo[0], sideWallColorInfo[1]);
       setWallTrimColor("#" + wallTrimColorInfo[0], wallTrimColorInfo[1]);
       setBaseTrimColor("#" + baseTrimColorInfo[0], baseTrimColorInfo[1]);
       setRoofTrimColor("#" + roofTrimColorInfo[0], roofTrimColorInfo[1]);
-      setWainscotColor("#" + wainscotColorInfo[0], wainscotColorInfo[1]);
       setDownspoutColor("#" + downspoutColorInfo[0], downspoutColorInfo[1]);
 
       //Doors

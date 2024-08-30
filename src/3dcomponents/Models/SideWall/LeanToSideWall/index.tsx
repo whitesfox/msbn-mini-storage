@@ -32,7 +32,7 @@ export const LeanToSideWall = ({
 }: ILeanToSideWall) => {
   const { sliceDoorData } = useDoorStore();
   const { width, deltaHeight, basicLength } = useStoreSize();
-  const { sideWallColor, wainscotColor } = useStoreColor();
+  const { sideWallColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
     if (wall === "EndWallBack") {
@@ -110,7 +110,7 @@ export const LeanToSideWall = ({
         lLength={lLength}
         width={width}
         sideWallColor={sideWallColor}
-        wainscotColor={wainscotColor}
+        wainscotColor={""}
         modelShape={model}
         objData={objData}
         pos={flag ? [lWidth - 0.1, 0, -lLength / 2] : [-lWidth, 0, lLength / 2]}

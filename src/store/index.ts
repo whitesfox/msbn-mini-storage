@@ -156,23 +156,26 @@ interface IStoreColor {
   sideWallColor: string;
   wallTrimColor: string;
   baseTrimColor: string;
-  wainscotColor: string;
   roofColorLabel: string;
   downspoutsColor: string;
+  mullionTrimColor: string;
+  rollupDoorColor: string;
   roofTrimColorLabel: string;
   sideWallColorLabel: string;
   wallTrimColorLabel: string;
   baseTrimColorLabel: string;
-  wainscotColorLabel: string;
   downspoutsColorLabel: string;
+  mullionTrimColorLabel: string;
+  rollupDoorColorLabel: string;
 
   setSideWallColor: (value1: string, value2: string) => void;
   setRoofColor: (value1: string, value2: string) => void;
   setRoofTrimColor: (value1: string, value2: string) => void;
   setWallTrimColor: (value1: string, value2: string) => void;
   setBaseTrimColor: (value1: string, value2: string) => void;
-  setWainscotColor: (value1: string, value2: string) => void;
   setDownspoutColor: (value1: string, value2: string) => void;
+  setMullionTrimColor: (value1: string, value2: string) => void;
+  setRollUpDoorColor: (value1: string, value2: string) => void;
 }
 
 export const useStoreColor = create<IStoreColor>((set) => ({
@@ -181,15 +184,17 @@ export const useStoreColor = create<IStoreColor>((set) => ({
   sideWallColor: "#A02223",
   wallTrimColor: "#CFCFDC",
   baseTrimColor: "#CFCFDC",
-  wainscotColor: "#CFCFDC",
   downspoutsColor: "#CFCFDC",
+  mullionTrimColor: "#CFCFDC",
+  rollupDoorColor: "#CFCFDC",
   roofColorLabel: "Galvalume",
   roofTrimColorLabel: "Polar White",
   sideWallColorLabel: "Red",
   wallTrimColorLabel: "Polar White",
   baseTrimColorLabel: "Polar White",
-  wainscotColorLabel: "Polar White",
   downspoutsColorLabel: "Polar White",
+  mullionTrimColorLabel: "Polar White",
+  rollupDoorColorLabel: "Polar White",
 
   setRoofColor: (value1, value2) =>
     set((state) => ({ ...state, roofColor: value1, roofColorLabel: value2 })),
@@ -217,17 +222,23 @@ export const useStoreColor = create<IStoreColor>((set) => ({
       baseTrimColor: value1,
       baseTrimColorLabel: value2,
     })),
-  setWainscotColor: (value1, value2) =>
-    set((state) => ({
-      ...state,
-      wainscotColor: value1,
-      wainscotColorLabel: value2,
-    })),
   setDownspoutColor: (value1, value2) =>
     set((state) => ({
       ...state,
       downspoutsColor: value1,
       downspoutsColorLabel: value2,
+    })),
+  setMullionTrimColor: (value1, value2) =>
+    set((state) => ({
+      ...state,
+      mullionTrimColor: value1,
+      mullionTrimColorLabel: value2,
+    })),
+  setRollUpDoorColor: (value1, value2) =>
+    set((state) => ({
+      ...state,
+      rollupDoorColor: value1,
+      rollupDoorColorLabel: value2,
     })),
 }));
 

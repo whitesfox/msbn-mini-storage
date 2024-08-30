@@ -20,15 +20,17 @@ const ColorCombo = ({ costCalculation, downspout }: ColorComboProps) => {
     sideWallColorLabel,
     wallTrimColorLabel,
     baseTrimColorLabel,
-    wainscotColorLabel,
     downspoutsColorLabel,
+    mullionTrimColorLabel,
+    rollupDoorColorLabel,
     setRoofColor,
     setRoofTrimColor,
     setSideWallColor,
     setWallTrimColor,
     setBaseTrimColor,
-    setWainscotColor,
     setDownspoutColor,
+    setMullionTrimColor,
+    setRollUpDoorColor,
   } = useStoreColor();
   return (
     <>
@@ -57,6 +59,24 @@ const ColorCombo = ({ costCalculation, downspout }: ColorComboProps) => {
         valueProps={wallTrimColorLabel}
         setValue={setWallTrimColor}
         type="basetrim"
+        costCalculation={costCalculation}
+        mainKey="chooseyourcolors"
+      />
+      <ColorComboboxPanel
+        panelName="Mullion trim"
+        dataList={colorSetting}
+        valueProps={mullionTrimColorLabel}
+        setValue={setMullionTrimColor}
+        type="mulliontrim"
+        costCalculation={costCalculation}
+        mainKey="chooseyourcolors"
+      />
+      <ColorComboboxPanel
+        panelName="Roll-up door"
+        dataList={colorSetting}
+        valueProps={rollupDoorColorLabel}
+        setValue={setRollUpDoorColor}
+        type="rollupdoor"
         costCalculation={costCalculation}
         mainKey="chooseyourcolors"
       />

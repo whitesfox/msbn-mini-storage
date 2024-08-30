@@ -21,7 +21,7 @@ export const GableSideWall = ({
   basicLength,
 }: IGableSideWall) => {
   const { sliceDoorData } = useDoorStore();
-  const { sideWallColor, wainscotColor } = useStoreColor();
+  const { sideWallColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
     if (item.building === "MainBuilding")
@@ -65,7 +65,7 @@ export const GableSideWall = ({
         eaveHeight={eaveHeight}
         basicLength={basicLength}
         sideWallColor={sideWallColor}
-        wainscotColor={wainscotColor}
+        wainscotColor={""}
         modelShape={model}
         objData={objData}
         pos={

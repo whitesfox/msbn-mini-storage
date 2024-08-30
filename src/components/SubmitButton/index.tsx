@@ -28,14 +28,12 @@ export const SubmitButton = () => {
     sideWallColor,
     wallTrimColor,
     baseTrimColor,
-    wainscotColor,
     downspoutsColor,
     roofColorLabel,
     roofTrimColorLabel,
     sideWallColorLabel,
     wallTrimColorLabel,
     baseTrimColorLabel,
-    wainscotColorLabel,
     downspoutsColorLabel,
   } = useStoreColor();
   const { doorData } = useDoorStore();
@@ -159,12 +157,6 @@ export const SubmitButton = () => {
     paramsContent += roofTrimColor.substring(1);
     paramsContent += "&rtc=";
     paramsContent += roofTrimColorLabel;
-
-    //Wainscot Color
-    paramsContent += "&wsc=";
-    paramsContent += wainscotColor.substring(1);
-    paramsContent += "&wsc=";
-    paramsContent += wainscotColorLabel;
 
     //Downspouts Color
     paramsContent += "&dsc=";

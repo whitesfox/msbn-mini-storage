@@ -22,7 +22,7 @@ export const GableEndWall = ({
   basicLength,
 }: IGableEndWall) => {
   const { sliceDoorData } = useDoorStore();
-  const { sideWallColor, wainscotColor } = useStoreColor();
+  const { sideWallColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
     if (

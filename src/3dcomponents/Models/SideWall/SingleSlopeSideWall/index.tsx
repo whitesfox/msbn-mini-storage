@@ -21,7 +21,7 @@ export const SingleSlopeSideWall = ({
   basicLength,
 }: ISingleSlopeSideWall) => {
   const { sliceDoorData } = useDoorStore();
-  const { sideWallColor, wainscotColor } = useStoreColor();
+  const { sideWallColor } = useStoreColor();
 
   const objData = sliceDoorData.filter((item) => {
     if (flag ? item.wall === "SideWallRight" : item.wall === "SideWallLeft")
@@ -64,7 +64,7 @@ export const SingleSlopeSideWall = ({
         eaveHeight={eaveHeight}
         basicLength={basicLength}
         sideWallColor={sideWallColor}
-        wainscotColor={wainscotColor}
+        wainscotColor={""}
         modelShape={model}
         objData={objData}
         pos={

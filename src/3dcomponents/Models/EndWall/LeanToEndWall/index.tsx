@@ -29,7 +29,7 @@ export const LeanToEndWall = ({
   lDeltaHeight,
   lInsetBayLength,
 }: ILeanToEndWall) => {
-  const { sideWallColor, wainscotColor } = useStoreColor();
+  const { sideWallColor } = useStoreColor();
   const { sliceDoorData } = useDoorStore();
 
   const model = useMemo(() => {
