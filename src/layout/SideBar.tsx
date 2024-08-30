@@ -3,7 +3,11 @@ import Price from "./Price/Price";
 import ColorCombo from "./ColorCombo/ColorCombo";
 import Loading from "components/Ui/Loading/Progress";
 import ForSelectItem from "./ForSelectItem/ForSelectItem";
-import { useAddMultipleRecess, useZoomInOrOut } from "store";
+import {
+  useAddMultipleHall,
+  useAddMultipleRecess,
+  useZoomInOrOut,
+} from "store";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useMemo } from "react";
 import { useLeanTo } from "store/useLeanTo";
@@ -15,6 +19,7 @@ import { costCalculationFun } from "utils/costCalculation";
 import { SubmitButton } from "components/SubmitButton";
 import { usePlacement, useStoreSize, useStyle, useUpgrade } from "store";
 import {
+  WalkDoorSizeList,
   eaveHeightSizeList,
   lengthSizeList,
   styleList,
@@ -22,6 +27,7 @@ import {
   recessCeilingHeight,
 } from "assets/dataList";
 import ViewDesignButton from "components/ViewDesignButton";
+import { DoorComboboxPanel } from "components/DisignPanel/Combobox/DoorComboboxPanel";
 
 export const SideBar = () => {
   const { label } = useStyle();
@@ -50,6 +56,13 @@ export const SideBar = () => {
     setMultipleRecessOpenStatus,
     setMultipleRecess,
   } = useAddMultipleRecess();
+
+  const {
+    multipleHall,
+    multipleHallOpenStatus,
+    setMultipleHallOpenStatus,
+    setMultipleHall,
+  } = useAddMultipleHall();
 
   const { priceData, isPriceLoaded, setDimension, dimension } = useGetPrice();
   const { priceList, setPriceList } = usePriceCalculation();
@@ -396,6 +409,27 @@ export const SideBar = () => {
     setMultipleRecess(tempObj);
   };
 
+  const multipleHallDeleteHandler = (
+    index: number,
+    keyVals: string | number,
+  ) => {
+    const tempHallOpenStatus = {
+      ...multipleHallOpenStatus,
+    };
+    if (tempHallOpenStatus[index]) {
+      tempHallOpenStatus[index] = false;
+    }
+    setMultipleHallOpenStatus(tempHallOpenStatus);
+    const tempMultipleHall = { ...multipleHall };
+    const tempObj = {} as { [key: string | number]: string | number };
+    Object.keys(tempMultipleHall).forEach((item: string) => {
+      if (tempMultipleHall[Number(item)] !== keyVals) {
+        tempObj[+item] = tempMultipleHall[+item];
+      }
+    });
+    setMultipleHall(tempObj);
+  };
+
   return (
     <>
       {isPriceLoaded && <Loading />}
@@ -466,7 +500,7 @@ export const SideBar = () => {
               typePitch="roofpitch"
             />
           </div>
-          <div className=" ">
+          <div>
             <h3 className="mb-[0.3rem] mt-4 px-0 pb-[7px] pt-px text-2xl font-light leading-10">
               Design your units
             </h3>
@@ -577,6 +611,144 @@ export const SideBar = () => {
                           </p>
                           <p className="px-0 pb-[7px] pt-px text-[0.9rem]">
                             Select to add another recess
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+            </>
+          </div>
+          <div>
+            <>
+              {Object.keys(multipleHall).length === 0 && (
+                <div
+                  className={`min-[84px] mb-5 mt-4 rounded-xl bg-[#F7F7F7] px-[21px] py-[15px] text-[1.2rem] font-normal`}
+                  onClick={() => {
+                    const tempHallOpenStatus = {
+                      ...multipleHallOpenStatus,
+                    };
+                    if (tempHallOpenStatus[0]) {
+                      tempHallOpenStatus[0] = !tempHallOpenStatus[0];
+                    } else {
+                      tempHallOpenStatus[0] = true;
+                    }
+                    setMultipleHallOpenStatus(tempHallOpenStatus);
+
+                    const tempMultipleHall = { ...multipleHall };
+                    tempMultipleHall[0] = 1;
+
+                    setMultipleHall(tempMultipleHall);
+                  }}
+                >
+                  <p className="px-0 pb-[3.2px] pt-px">Hall</p>
+                  <p className="px-0 pb-[7px] pt-px text-[0.9rem]">
+                    Select to add a hall
+                  </p>
+                </div>
+              )}
+              {Object.values(multipleHall).map((keysVal, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <div
+                      className={`min-[84px] group relative mb-5 mt-4 rounded-xl px-[21px] py-[15px] text-[1.2rem] font-normal ${multipleHallOpenStatus[+keysVal - 1] ? "bg-[#B6B6B6] text-[#FFF]" : "bg-[#F7F7F7]"}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const tempHallOpenStatus = {
+                          ...multipleHallOpenStatus,
+                        };
+                        if (tempHallOpenStatus[+keysVal - 1]) {
+                          tempHallOpenStatus[+keysVal - 1] =
+                            !tempHallOpenStatus[+keysVal - 1];
+                        } else {
+                          tempHallOpenStatus[+keysVal - 1] = true;
+                        }
+                        setMultipleHallOpenStatus(tempHallOpenStatus);
+                      }}
+                    >
+                      <div
+                        className="absolute bottom-0 right-0 top-0 hidden cursor-pointer items-center rounded-r-lg bg-red-500 p-2 group-hover:flex group-hover:text-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          multipleHallDeleteHandler(index, keysVal);
+                        }}
+                      >
+                        <span>
+                          <MdDelete />
+                        </span>
+                      </div>
+                      <p className="px-0 pb-[3.2px] pt-px">Hall {index + 1}</p>
+                      <p className="px-0 pb-[7px] pt-px text-[0.9rem]">
+                        Click to hide or show options
+                      </p>
+                    </div>
+                    <div
+                      className={`hover:cursor-pointer ${multipleHallOpenStatus[+keysVal - 1] ? "block" : "hidden"} `}
+                    >
+                      <DoorComboboxPanel
+                        index={0}
+                        panelTitle={"Hall ends"}
+                        valueProps={"3 x 7 half glass doors"}
+                        dataList={WalkDoorSizeList}
+                        panelName={"Hall ends"}
+                        itemforRange={0}
+                        nameForRange={""}
+                        typeVal={""}
+                        mainKey={""}
+                        costCalculation={costCalculation}
+                      />
+                      <ForSelectItem
+                        mainKey="optionalupgrades"
+                        ItemNameTitle="Ceiling"
+                        itemValue={"Select to add hall ceiling panels"}
+                        itemStatus={downspout}
+                        setItemStatus={setdownspout}
+                        costCalculation={costCalculation}
+                      />
+                      <SizeComboboxPanel
+                        panelName="Ceiling height"
+                        dataList={recessCeilingHeight}
+                        valueProps={7}
+                        setValue={setLeanToWidth}
+                        costCalculation={costCalculation}
+                        type="ceilingheight"
+                        mainKey={"recess"}
+                        index={Number(index)}
+                      />
+                      <ForSelectItem
+                        mainKey="optionalupgrades"
+                        ItemNameTitle="Flush hall"
+                        itemValue={"Select to upgrade to flush hall panels"}
+                        itemStatus={downspout}
+                        setItemStatus={setdownspout}
+                        costCalculation={costCalculation}
+                      />
+                      {Object.keys(multipleHall).length - 1 === index && (
+                        <div
+                          className={`min-[84px] mb-5 mt-4 rounded-xl bg-[#F7F7F7] px-[21px] py-[15px] text-[1.2rem] font-normal`}
+                          onClick={() => {
+                            const tempHallOpenStatus = {
+                              ...multipleHallOpenStatus,
+                            };
+                            if (tempHallOpenStatus[index + 1]) {
+                              tempHallOpenStatus[index + 1] =
+                                !tempHallOpenStatus[index];
+                            } else {
+                              tempHallOpenStatus[index + 1] = true;
+                            }
+
+                            setMultipleHallOpenStatus(tempHallOpenStatus);
+                            const tempMultipleHall = { ...multipleHall };
+                            tempMultipleHall[index + 1] = index + 2;
+                            setMultipleHall(tempMultipleHall);
+                          }}
+                        >
+                          <p className="px-0 pb-[3.2px] pt-px">
+                            Add another hall
+                          </p>
+                          <p className="px-0 pb-[7px] pt-px text-[0.9rem]">
+                            Select to add another hall
                           </p>
                         </div>
                       )}

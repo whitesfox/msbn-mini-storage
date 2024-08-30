@@ -435,6 +435,22 @@ export const useAddMultipleRecess = create<IAddRecess>((set) => ({
     set((state) => ({ ...state, multipleRecess: value })),
 }));
 
+interface IAddHall {
+  multipleHall: { [key: number]: number | string };
+  multipleHallOpenStatus: { [key: number]: boolean };
+  setMultipleHallOpenStatus: (value: { [key: number]: boolean }) => void;
+  setMultipleHall: (value: { [key: number]: number | string }) => void;
+}
+
+export const useAddMultipleHall = create<IAddHall>((set) => ({
+  multipleHall: {},
+  multipleHallOpenStatus: {},
+  setMultipleHallOpenStatus: (value) =>
+    set((state) => ({ ...state, multipleHallOpenStatus: value })),
+  setMultipleHall: (value) =>
+    set((state) => ({ ...state, multipleHall: value })),
+}));
+
 interface ZoomInOutProps {
   zoomAvailable: boolean;
   setZoomAvailable: (value: boolean) => void;

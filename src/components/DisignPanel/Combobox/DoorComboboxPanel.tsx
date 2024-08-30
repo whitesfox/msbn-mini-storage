@@ -55,7 +55,7 @@ export const DoorComboboxPanel = ({
     <>
       <div className="min-[84px] mb-5 mt-4 w-full flex-1 select-none rounded-xl bg-[#f7f7f7] px-[21px] py-[15px] hover:cursor-pointer">
         <h3 className="px-0 pb-[7px] pt-px text-[1.2rem] font-normal leading-normal">
-          {panelName} size
+          {panelName}
         </h3>
 
         <Combobox
