@@ -1,9 +1,7 @@
 import { create } from "zustand";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase";
-export interface IRigidFrame {
-  pos: [number, number, number];
-}
+
 interface AuthDataType {
   isAuthenticated: boolean;
   authenticatedUser: () => void;

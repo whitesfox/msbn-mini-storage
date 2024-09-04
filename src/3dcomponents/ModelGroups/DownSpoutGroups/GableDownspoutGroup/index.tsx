@@ -1,27 +1,14 @@
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
-import { useStoreSize, useUpgrade } from "store";
+import { useStoreSize } from "store";
 import { DownspoutExtrude } from "3dcomponents/Models/Downspout/DownspoutExtrude";
 
 export const GableDownspoutGroup = () => {
-  const { width, eaveHeight, bayLength, basicLength, deltaHeight } =
-    useStoreSize();
+  const { width, eaveHeight, basicLength, deltaHeight } = useStoreSize();
 
   //Calculate main downspouts count
   const mainDownspoutCount = useMemo(() => {
     return Array.from({ length: Math.floor(basicLength / 28) + 2 }, () => 0);
   }, [basicLength]);
-
-  //Calculate inset bay downspouts count
-  const insetBayDownspoutCount = Array.from(
-    { length: Math.floor(bayLength / 28) + 1 },
-    () => 0,
-  );
-
-  //Calculate inset bay rigid frame interval
-  const insetBayRigidFrameInterval =
-    (bayLength - 0.9) / insetBayDownspoutCount.length;
 
   //Calculate main downspouts positions
   const DownspoutPos = useMemo(() => {
@@ -55,22 +42,6 @@ export const GableDownspoutGroup = () => {
     return posArray;
   }, [width, basicLength, mainDownspoutCount]);
 
-  //Calculate inset bay downspouts position
-  const InsetBayDownspoutPos = useMemo(() => {
-    const posArray: [number, number, number][] = [];
-
-    if (bayLength !== 0)
-      insetBayDownspoutCount.map((_item, index) => {
-        posArray.push([
-          -(width / 2 + 3 / 15),
-          0.3,
-          index * insetBayRigidFrameInterval,
-        ]);
-      });
-
-    return posArray;
-  }, [width, insetBayDownspoutCount]);
-
   return (
     <group>
       {/* left main downspouts */}
@@ -96,37 +67,6 @@ export const GableDownspoutGroup = () => {
           deltaHeight={deltaHeight}
           endOfInsetBay={false}
         />
-      ))}
-      {/* inset bay downspouts */}
-      {InsetBayDownspoutPos.map((item, index) => (
-        <group key={index}>
-          {/* left inset bay downspouts */}
-          <DownspoutExtrude
-            pos={[
-              item[0] + 0.7,
-              item[1],
-              item[2] + basicLength / 2 + insetBayRigidFrameInterval + 0.5,
-            ]}
-            flag={true}
-            width={width}
-            eaveHeight={eaveHeight}
-            deltaHeight={deltaHeight}
-            endOfInsetBay={true}
-          />
-          {/* right inset bay downspouts */}
-          <DownspoutExtrude
-            pos={[
-              item[0] + width - 0.3,
-              item[1],
-              item[2] + basicLength / 2 + insetBayRigidFrameInterval + 0.5,
-            ]}
-            flag={false}
-            width={width}
-            eaveHeight={eaveHeight}
-            deltaHeight={deltaHeight}
-            endOfInsetBay={true}
-          />
-        </group>
       ))}
     </group>
   );

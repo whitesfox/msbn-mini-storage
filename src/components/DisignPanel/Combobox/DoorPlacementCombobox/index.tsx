@@ -1,12 +1,9 @@
-/* eslint-disable no-case-declarations */
-/* eslint-disable react-hooks/rules-of-hooks */
 import MovableInfoList from "utils/movable.json";
 import { Fragment, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Combobox, Transition } from "@headlessui/react";
 import { useSliderUpdate, useStoreCameraControl, useStoreSize } from "store";
 import { useDoorCombo, useDoorStore } from "store/useDoor";
-import { useRigidFrameStore } from "store/useRigidFrame";
 import { placementList } from "assets/dataList";
 
 export interface TdataList {
@@ -60,7 +57,6 @@ export const DoorPlacementCombobox = ({
   } = useDoorStore();
   const { width, basicLength, length, eaveHeight } = useStoreSize();
   const { doorComboData, updateComboData } = useDoorCombo();
-  const { rigidFrameData } = useRigidFrameStore();
   const { positionRange, setPositionRange } = useSliderUpdate();
   const { cameraRef } = useStoreCameraControl();
   const [selected] = useState(dataList[0]);
@@ -414,21 +410,14 @@ export const DoorPlacementCombobox = ({
                           );
                         }
                       });
-                      rigidFrameData.filter((item) => {
-                        points.push(item.pos[2] - 0.15, item.pos[2] + 0.15);
-                      });
                       points.push(-basicLength / 2 + 0.6);
                       points.push(basicLength / 2 - 0.6);
                       points.sort(function (a, b) {
                         return a - b;
                       });
-                      count =
-                        doorData.filter((item) => {
-                          if (item.wall === "SideWallRight") return item;
-                        }).length +
-                        rigidFrameData.filter((item) => {
-                          return item;
-                        }).length;
+                      count = doorData.filter((item) => {
+                        if (item.wall === "SideWallRight") return item;
+                      }).length;
                       for (let i = 0; i <= count * 2 + 1; i += 2) {
                         if (points[i + 1] - points[i] > movableInfo.width) {
                           if (movableInfo.height < eaveHeight) {
@@ -556,21 +545,14 @@ export const DoorPlacementCombobox = ({
                           );
                         }
                       });
-                      rigidFrameData.filter((item) => {
-                        points.push(item.pos[2] - 0.15, item.pos[2] + 0.15);
-                      });
                       points.push(-basicLength / 2 + 0.6);
                       points.push(basicLength / 2 - 0.6);
                       points.sort(function (a, b) {
                         return a - b;
                       });
-                      count =
-                        doorData.filter((item) => {
-                          if (item.wall === "SideWallLeft") return item;
-                        }).length +
-                        rigidFrameData.filter((item) => {
-                          return item;
-                        }).length;
+                      count = doorData.filter((item) => {
+                        if (item.wall === "SideWallLeft") return item;
+                      }).length;
                       for (let i = 0; i <= count * 2 + 1; i += 2) {
                         if (points[i + 1] - points[i] > movableInfo.width) {
                           if (movableInfo.height < eaveHeight) {
