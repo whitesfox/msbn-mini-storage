@@ -59,13 +59,14 @@ export const GableDownspoutGroup = () => {
   const InsetBayDownspoutPos = useMemo(() => {
     const posArray: [number, number, number][] = [];
 
-    insetBayDownspoutCount.map((_item, index) => {
-      posArray.push([
-        -(width / 2 + 3 / 15),
-        0.3,
-        index * insetBayRigidFrameInterval,
-      ]);
-    });
+    if (bayLength !== 0)
+      insetBayDownspoutCount.map((_item, index) => {
+        posArray.push([
+          -(width / 2 + 3 / 15),
+          0.3,
+          index * insetBayRigidFrameInterval,
+        ]);
+      });
 
     return posArray;
   }, [width, insetBayDownspoutCount]);
