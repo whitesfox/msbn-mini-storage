@@ -3,7 +3,6 @@ import { useStoreSize } from "store";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { useLeanTo } from "store/useLeanTo";
 
 interface PitchOptionProps {
   valueProps: string;
@@ -48,8 +47,7 @@ export const PitchOption = ({
   indexKey,
 }: PitchOptionProps) => {
   const [query, setQuery] = useState("");
-  const { width, setPitch, setLeanToPitch } = useStoreSize();
-  const { leanToData } = useLeanTo();
+  const { width, setPitch } = useStoreSize();
   const selectRef = useRef<any>();
 
   const filteredPitch =
@@ -62,21 +60,11 @@ export const PitchOption = ({
             .includes(query.toLowerCase().replace(/\s+/g, "")),
         );
 
-  const leanToFilteredPitch =
-    query === ""
-      ? leanToPitchOptionSizeList
-      : leanToPitchOptionSizeList.filter((item) =>
-          item.val
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, "")),
-        );
   useEffect(() => {
-    if (type === "main")
-      setPitch({
-        id: ((width / 2) * parseInt(valueProps.substring(0, 1))) / 14,
-        val: valueProps.substring(0, 1) + " / 12",
-      });
+    setPitch({
+      id: ((width / 2) * parseInt(valueProps.substring(0, 1))) / 14,
+      val: valueProps.substring(0, 1) + " / 12",
+    });
   }, [width]);
 
   const calcSelectedNmber = () => {
@@ -86,44 +74,13 @@ export const PitchOption = ({
 
   return (
     <Combobox
-      value={
-        type === "main" ? pitchOptionSizeList[0] : leanToPitchOptionSizeList[0]
-      }
+      value={pitchOptionSizeList[0]}
       onChange={(event) => {
         if (event) {
-          if (type === "main") {
-            setPitch({
-              id: (width / 2) * (event.id / 14),
-              val: event.val,
-            });
-          }
-          if (type === "leanto") {
-            if (wall === "EndWallFront") {
-              setLeanToPitch({
-                id: leanToData[0].lWidth * (event.id / 14),
-                val: event.val,
-                wall: wall,
-              });
-            } else if (wall === "EndWallBack") {
-              setLeanToPitch({
-                id: leanToData[1].lWidth * (event.id / 14),
-                val: event.val,
-                wall: wall,
-              });
-            } else if (wall === "SideWallRight") {
-              setLeanToPitch({
-                id: leanToData[2].lWidth * (event.id / 14),
-                val: event.val,
-                wall: wall,
-              });
-            } else if (wall === "SideWallLeft") {
-              setLeanToPitch({
-                id: leanToData[3].lWidth * (event.id / 14),
-                val: event.val,
-                wall: wall,
-              });
-            }
-          }
+          setPitch({
+            id: (width / 2) * (event.id / 14),
+            val: event.val,
+          });
           costCalculation(typePitch, event.val, mainKey);
         }
       }}
@@ -157,67 +114,36 @@ export const PitchOption = ({
           >
             <div>
               <Combobox.Options className="mt-1 flex h-full w-full flex-col overflow-auto rounded-b-md py-0 text-base shadow-lg ring-1 ring-black/5 focus:outline-1 sm:text-base">
-                {type === "main"
-                  ? filteredPitch.map((item) => (
-                      <Combobox.Option
-                        key={item.id}
-                        className={({ active }) =>
-                          `relative w-full cursor-default select-none p-2.5 text-left text-sm text-[#4A4A4F] ${
-                            active ? "bg-zinc-100" : ""
-                          }`
-                        }
-                        value={item}
-                      >
-                        {({ selected, active }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                selected ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {item.val}
-                            </span>
-                            {selected ? (
-                              <span
-                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                  active ? "text-white" : "text-teal-600"
-                                }`}
-                              ></span>
-                            ) : null}
-                          </>
-                        )}
-                      </Combobox.Option>
-                    ))
-                  : leanToFilteredPitch.map((item) => (
-                      <Combobox.Option
-                        key={item.id}
-                        className={({ active }) =>
-                          `relative w-full cursor-default select-none p-2.5 text-left text-sm text-[#4A4A4F] ${
-                            active ? "bg-zinc-100" : ""
-                          }`
-                        }
-                        value={item}
-                      >
-                        {({ selected, active }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                selected ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {item.val}
-                            </span>
-                            {selected ? (
-                              <span
-                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                  active ? "text-white" : "text-teal-600"
-                                }`}
-                              ></span>
-                            ) : null}
-                          </>
-                        )}
-                      </Combobox.Option>
-                    ))}
+                {filteredPitch.map((item) => (
+                  <Combobox.Option
+                    key={item.id}
+                    className={({ active }) =>
+                      `relative w-full cursor-default select-none p-2.5 text-left text-sm text-[#4A4A4F] ${
+                        active ? "bg-zinc-100" : ""
+                      }`
+                    }
+                    value={item}
+                  >
+                    {({ selected, active }) => (
+                      <>
+                        <span
+                          className={`block truncate ${
+                            selected ? "font-medium" : "font-normal"
+                          }`}
+                        >
+                          {item.val}
+                        </span>
+                        {selected ? (
+                          <span
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                              active ? "text-white" : "text-teal-600"
+                            }`}
+                          ></span>
+                        ) : null}
+                      </>
+                    )}
+                  </Combobox.Option>
+                ))}
               </Combobox.Options>
             </div>
           </Transition>

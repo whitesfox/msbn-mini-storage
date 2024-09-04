@@ -7,7 +7,6 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useStoreColor, useStoreSize } from "store";
 import { Addition, Geometry, Subtraction } from "@react-three/csg";
-import { useLeanTo } from "store/useLeanTo";
 
 interface IHangOnTrim {
   pos: [number, number, number];
@@ -25,8 +24,7 @@ export const HangOnTrim = ({
   trimLength,
   direction,
 }: IHangOnTrim) => {
-  const { length, overhangPurlin, leanToDropHeightSize } = useStoreSize();
-  const { leanToData } = useLeanTo();
+  const { length, overhangPurlin } = useStoreSize();
 
   const trimModel = useMemo(() => {
     const modelShape = new Shape();
@@ -106,37 +104,6 @@ export const HangOnTrim = ({
     easing.dampC(trimRef.current.color, roofTrimColor, 0.2, delta),
   );
 
-  const sliceBoxData = useMemo(() => {
-    const currentLeanToData = leanToData.filter(
-      (item) => item.wall === direction,
-    )[0];
-    const currentLeanToDropHeightSize = leanToDropHeightSize.filter(
-      (item) => item.wall === direction,
-    )[0].val;
-
-    const boxLength = currentLeanToData.lLength;
-
-    let boxPosZ = 0;
-    if (direction === "SideWallLeft")
-      boxPosZ = length / 2 + currentLeanToData.lPos[2] + 0.7;
-    if (direction === "SideWallRight")
-      boxPosZ = length / 2 - currentLeanToData.lPos[2] + 0.7;
-
-    let visible = false;
-    if (
-      currentLeanToDropHeightSize === 0 &&
-      currentLeanToData.type !== "Closure"
-    )
-      visible = true;
-    else visible = false;
-
-    return {
-      visible: visible,
-      boxLength: boxLength,
-      boxPosZ: boxPosZ,
-    };
-  }, [direction, leanToData, leanToDropHeightSize, length]);
-
   return (
     <group
       rotation={[rot[0], rot[1], rot[2]]}
@@ -188,15 +155,6 @@ export const HangOnTrim = ({
               ]}
             />
           </Subtraction>
-          {sliceBoxData.visible && (
-            <Subtraction
-              position={[0, -0.3, sliceBoxData.boxPosZ + overhangPurlin / 2]}
-            >
-              <boxGeometry
-                args={[1, 1, sliceBoxData.boxLength + overhangPurlin]}
-              />
-            </Subtraction>
-          )}
         </Geometry>
         <meshStandardMaterial
           metalness={0.7}

@@ -9,8 +9,7 @@ import {
   useZoomInOrOut,
 } from "store";
 import { MdDelete } from "react-icons/md";
-import { useEffect, useMemo } from "react";
-import { useLeanTo } from "store/useLeanTo";
+import { useEffect } from "react";
 import { useGetPrice, usePriceCalculation } from "store/usePrice";
 import { PitchOption } from "components/DisignPanel/Combobox/PitchOption";
 import { ComboboxPanel } from "components/DisignPanel/Combobox/ComboboxPanel";
@@ -31,23 +30,17 @@ import { DoorComboboxPanel } from "components/DisignPanel/Combobox/DoorComboboxP
 
 export const SideBar = () => {
   const { label } = useStyle();
-  const { leanToData, updateLeanToData } = useLeanTo();
   const { downspout, setdownspout } = useUpgrade();
-  const { placement } = usePlacement();
   const { setZoomAvailable } = useZoomInOrOut();
   const {
     width,
     eaveHeight,
     pitchOptionSize,
-    leanToPitchOptionSize,
     basicLength,
-    deltaHeight,
     bayLength,
-    leanToDropHeightSize,
     setWidth,
     setLength,
     setEaveHeight,
-    setLeanToPitch,
   } = useStoreSize();
 
   const {
@@ -75,32 +68,6 @@ export const SideBar = () => {
     const tempDimension = [...dimension] as Array<number>;
     tempDimension[0] = value;
     setDimension(tempDimension);
-    leanToData.map((item, _index) => {
-      if (item.wall === "SideWallRight")
-        updateLeanToData({
-          wall: leanToData[2].wall,
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth,
-          lLength: leanToData[2].lLength,
-          lEaveHeight: leanToData[2].lEaveHeight,
-          lDeltaHeight: leanToData[2].lDeltaHeight,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [value / 2 - 0.1, leanToData[2].lPos[1], leanToData[2].lPos[2]],
-          lRot: leanToData[2].lRot,
-        });
-      if (item.wall === "SideWallLeft")
-        updateLeanToData({
-          wall: leanToData[3].wall,
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight: leanToData[3].lEaveHeight,
-          lDeltaHeight: leanToData[3].lDeltaHeight,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [-value / 2, leanToData[3].lPos[1], leanToData[3].lPos[2]],
-          lRot: leanToData[3].lRot,
-        });
-    });
 
     setWidth(value);
   };
@@ -109,259 +76,8 @@ export const SideBar = () => {
     const tempDimension = [...dimension] as Array<number>;
     tempDimension[1] = value;
     setDimension(tempDimension);
-    leanToData.map((item, _index) => {
-      if (item.wall === "EndWallFront")
-        updateLeanToData({
-          wall: leanToData[0].wall,
-          type: leanToData[0].type,
-          lWidth: leanToData[0].lWidth,
-          lLength: leanToData[0].lLength,
-          lEaveHeight: leanToData[0].lEaveHeight,
-          lDeltaHeight: leanToData[0].lDeltaHeight,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: [
-            leanToData[0].lPos[0],
-            leanToData[0].lPos[1],
-            value / 2 - bayLength,
-          ],
-          lRot: leanToData[0].lRot,
-        });
-      if (item.wall === "EndWallBack")
-        updateLeanToData({
-          wall: leanToData[1].wall,
-          type: leanToData[1].type,
-          lWidth: leanToData[1].lWidth,
-          lLength: leanToData[1].lLength,
-          lEaveHeight: leanToData[1].lEaveHeight,
-          lDeltaHeight: leanToData[1].lDeltaHeight,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: [leanToData[1].lPos[0], leanToData[1].lPos[1], -value / 2],
-          lRot: leanToData[1].lRot,
-        });
-      if (item.wall === "SideWallRight")
-        updateLeanToData({
-          wall: leanToData[2].wall,
-          type: leanToData[2].type,
-          lWidth: leanToData[2].lWidth,
-          lLength: leanToData[2].lLength,
-          lEaveHeight: leanToData[2].lEaveHeight,
-          lDeltaHeight: leanToData[2].lDeltaHeight,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: [
-            leanToData[2].lPos[0],
-            leanToData[2].lPos[1],
-            -value / 2 + leanToData[2].lLength / 2,
-          ],
-          lRot: leanToData[2].lRot,
-        });
-      if (item.wall === "SideWallLeft")
-        updateLeanToData({
-          wall: leanToData[3].wall,
-          type: leanToData[3].type,
-          lWidth: leanToData[3].lWidth,
-          lLength: leanToData[3].lLength,
-          lEaveHeight: leanToData[3].lEaveHeight,
-          lDeltaHeight: leanToData[3].lDeltaHeight,
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: [
-            leanToData[3].lPos[0],
-            leanToData[3].lPos[1],
-            -value / 2 + leanToData[3].lLength / 2,
-          ],
-          lRot: leanToData[3].lRot,
-        });
-    });
 
     setLength(value);
-  };
-
-  const leanToSizeProps = useMemo(() => {
-    const leanToWidth = { Back: 0, Left: 0, Front: 0, Right: 0 } as {
-      [key: string]: number;
-    };
-    const leanToLength = { Back: 0, Left: 0, Front: 0, Right: 0 } as {
-      [key: string]: number;
-    };
-    const leanToEaveHeight = { Back: 0, Left: 0, Front: 0, Right: 0 } as {
-      [key: string]: number;
-    };
-
-    const leanToType = { Back: "", Left: "", Front: "", Right: "" } as {
-      [key: string]: string;
-    };
-    const leanToWall = { Back: "", Left: "", Front: "", Right: "" } as {
-      [key: string]: string;
-    };
-    const leanToPitchList = { Back: "", Left: "", Front: "", Right: "" } as {
-      [key: string]: string;
-    };
-    Object.keys(placement).forEach((key) => {
-      if (placement[key] === "Right Endwall") {
-        leanToWidth["Right Endwall"] = leanToData[1].lWidth;
-        leanToLength["Right Endwall"] = leanToData[1].lLength;
-        leanToEaveHeight["Right Endwall"] =
-          eaveHeight - leanToData[1].lEaveHeight - leanToData[1].lDeltaHeight;
-        leanToType["Right Endwall"] = leanToData[1].type;
-        leanToPitchList["Right Endwall"] = leanToPitchOptionSize[1].val;
-        leanToWall["Right Endwall"] = "EndWallBack";
-      }
-
-      if (placement[key] === "Back Sidewall") {
-        leanToWidth["Back Sidewall"] = leanToData[3].lWidth;
-        leanToLength["Back Sidewall"] = leanToData[3].lLength;
-        leanToEaveHeight["Back Sidewall"] =
-          eaveHeight - leanToData[3].lEaveHeight - leanToData[3].lDeltaHeight;
-        leanToType["Back Sidewall"] = leanToData[3].type;
-        leanToPitchList["Back Sidewall"] = leanToPitchOptionSize[3].val;
-        leanToWall["Back Sidewall"] = "SideWallLeft";
-      }
-
-      if (placement[key] === "Left Endwall") {
-        leanToWidth["Left Endwall"] = leanToData[0].lWidth;
-        leanToLength["Left Endwall"] = leanToData[0].lLength;
-        leanToEaveHeight["Left Endwall"] =
-          eaveHeight - leanToData[0].lEaveHeight - leanToData[0].lDeltaHeight;
-        leanToType["Left Endwall"] = leanToData[0].type;
-        leanToPitchList["Left Endwall"] = leanToPitchOptionSize[0].val;
-        leanToWall["Left Endwall"] = "EndWallFront";
-      }
-
-      if (placement[key] === "Front Sidewall") {
-        if (label === "Single Slope") {
-          leanToEaveHeight["Front Sidewall"] =
-            eaveHeight +
-            deltaHeight -
-            leanToData[2].lEaveHeight -
-            leanToData[2].lDeltaHeight;
-        } else {
-          leanToEaveHeight["Front Sidewall"] =
-            eaveHeight - leanToData[2].lEaveHeight - leanToData[2].lDeltaHeight;
-        }
-        leanToWidth["Front Sidewall"] = leanToData[2].lWidth;
-        leanToLength["Front Sidewall"] = leanToData[2].lLength;
-        leanToType["Front Sidewall"] = leanToData[2].type;
-        leanToPitchList["Front Sidewall"] = leanToPitchOptionSize[2].val;
-        leanToWall["Front Sidewall"] = "SideWallRight";
-      }
-    });
-    return {
-      leanToWidth: leanToWidth,
-      leanToLength: leanToLength,
-      leanToEaveHeight: leanToEaveHeight,
-      leanToType: leanToType,
-      leanToPitchList: leanToPitchList,
-      leanToWall: leanToWall,
-    };
-  }, [placement, leanToData, leanToPitchOptionSize]);
-
-  const setLeanToWidth = (value: number, type?: string, index?: number) => {
-    if (typeof index !== "undefined") {
-      if (placement[index] === "Left Endwall") {
-        setLeanToPitch({
-          id:
-            (value * parseInt(leanToPitchOptionSize[0].val.substring(0, 1))) /
-            14,
-          val: leanToPitchOptionSize[0].val.substring(0, 1) + " / 12",
-          wall: "EndWallFront",
-        });
-
-        updateLeanToData({
-          wall: leanToData[0].wall,
-          type: leanToData[0].type,
-          lWidth: value,
-          lLength: leanToData[0].lLength,
-          lEaveHeight:
-            eaveHeight -
-            (value * parseInt(leanToPitchOptionSize[0].val.substring(0, 1))) /
-              14 -
-            leanToDropHeightSize[0].val,
-          lDeltaHeight:
-            (value * parseInt(leanToPitchOptionSize[0].val.substring(0, 1))) /
-            14,
-          lInsetBayLength: leanToData[0].lInsetBayLength,
-          lPos: leanToData[0].lPos,
-          lRot: leanToData[0].lRot,
-        });
-      } else if (placement[index] === "Right Endwall") {
-        setLeanToPitch({
-          id:
-            (value * parseInt(leanToPitchOptionSize[1].val.substring(0, 1))) /
-            14,
-          val: leanToPitchOptionSize[1].val.substring(0, 1) + " / 12",
-          wall: "EndWallBack",
-        });
-
-        updateLeanToData({
-          wall: leanToData[1].wall,
-          type: leanToData[1].type,
-          lWidth: value,
-          lLength: leanToData[1].lLength,
-          lEaveHeight:
-            eaveHeight -
-            (value * parseInt(leanToPitchOptionSize[1].val.substring(0, 1))) /
-              14 -
-            leanToDropHeightSize[1].val,
-          lDeltaHeight:
-            (value * parseInt(leanToPitchOptionSize[1].val.substring(0, 1))) /
-            14,
-          lInsetBayLength: leanToData[1].lInsetBayLength,
-          lPos: leanToData[1].lPos,
-          lRot: leanToData[1].lRot,
-        });
-      } else if (placement[index] === "Front Sidewall") {
-        setLeanToPitch({
-          id:
-            (value * parseInt(leanToPitchOptionSize[2].val.substring(0, 1))) /
-            14,
-          val: leanToPitchOptionSize[2].val.substring(0, 1) + " / 12",
-          wall: "SideWallRight",
-        });
-
-        updateLeanToData({
-          wall: leanToData[2].wall,
-          type: leanToData[2].type,
-          lWidth: value,
-          lLength: leanToData[2].lLength,
-          lEaveHeight:
-            eaveHeight -
-            (value * parseInt(leanToPitchOptionSize[2].val.substring(0, 1))) /
-              14 -
-            leanToDropHeightSize[2].val,
-          lDeltaHeight:
-            (value * parseInt(leanToPitchOptionSize[2].val.substring(0, 1))) /
-            14,
-          lInsetBayLength: leanToData[2].lInsetBayLength,
-          lPos: leanToData[2].lPos,
-          lRot: leanToData[2].lRot,
-        });
-      } else if (placement[index] === "Back Sidewall") {
-        setLeanToPitch({
-          id:
-            value *
-            (parseInt(leanToPitchOptionSize[3].val.substring(0, 1)) / 14),
-          val: leanToPitchOptionSize[3].val.substring(0, 1) + " / 12",
-          wall: "SideWallLeft",
-        });
-
-        updateLeanToData({
-          wall: leanToData[3].wall,
-          type: leanToData[3].type,
-          lWidth: value,
-          lLength: leanToData[3].lLength,
-          lEaveHeight:
-            eaveHeight -
-            value *
-              (parseInt(leanToPitchOptionSize[3].val.substring(0, 1)) / 14) -
-            leanToDropHeightSize[3].val,
-          lDeltaHeight:
-            value *
-            (parseInt(leanToPitchOptionSize[3].val.substring(0, 1)) / 14),
-          lInsetBayLength: leanToData[3].lInsetBayLength,
-          lPos: leanToData[3].lPos,
-          lRot: leanToData[3].lRot,
-        });
-      }
-    }
   };
 
   const costCalculation = (
@@ -377,12 +93,6 @@ export const SideBar = () => {
       priceList,
       priceData,
       booleanTypeOption,
-      placement,
-      leanToSizeProps.leanToWidth,
-      leanToSizeProps.leanToLength,
-      leanToSizeProps.leanToEaveHeight,
-      leanToSizeProps.leanToPitchList,
-      eaveHeight,
     );
     setZoomAvailable(true);
     setPriceList(constTempObj.tempPriceList, constTempObj.totalCost);
@@ -575,12 +285,8 @@ export const SideBar = () => {
                       <SizeComboboxPanel
                         panelName="Ceiling height"
                         dataList={recessCeilingHeight}
-                        valueProps={
-                          leanToSizeProps.leanToWidth[
-                            `${placement[Number(index)]}`
-                          ]
-                        }
-                        setValue={setLeanToWidth}
+                        valueProps={0}
+                        setValue={""}
                         costCalculation={costCalculation}
                         type="ceilingheight"
                         mainKey={"recess"}
@@ -710,7 +416,7 @@ export const SideBar = () => {
                         panelName="Ceiling height"
                         dataList={recessCeilingHeight}
                         valueProps={7}
-                        setValue={setLeanToWidth}
+                        setValue={""}
                         costCalculation={costCalculation}
                         type="ceilingheight"
                         mainKey={"recess"}

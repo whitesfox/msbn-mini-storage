@@ -1,11 +1,9 @@
 /* eslint-disable react/no-unknown-property */
 import { useRef } from "react";
-import { useLeanTo } from "store/useLeanTo";
 import { Configurator } from "./Configurator";
 import { Environment } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ViewControl } from "3dcomponents/ViewControl";
-import { LeanTo } from "3dcomponents/Building/LeanTo";
 import { usePriceCalculation, usePaymentCalculation } from "store/usePrice";
 import { VscSettings } from "react-icons/vsc";
 import { calculateDownPaymentYears } from "utils/DownPaymentCalculator";
@@ -13,8 +11,6 @@ import { formatPrice } from "utils/PriceFormat";
 import { ViewDesign } from "components/ViewDesign";
 
 export const Scene = () => {
-  const { leanToData } = useLeanTo();
-
   const { totalPrice } = usePriceCalculation();
   const { setPaymentCalculationStatus } = usePaymentCalculation();
   const Lights = () => {
@@ -43,23 +39,6 @@ export const Scene = () => {
         <ambientLight intensity={1.7} />
         <Environment files={"./potsdamer_platz_1k.hdr"} />
         <Configurator />
-        {leanToData.map((item, index) =>
-          item.type !== "Closure" ? (
-            <LeanTo
-              key={index}
-              wall={item.wall}
-              type={item.type}
-              lWidth={item.lWidth}
-              lLength={item.lLength}
-              lEaveHeight={item.lEaveHeight}
-              lDeltaHeight={item.lDeltaHeight}
-              lInsetBayLength={item.lInsetBayLength}
-              lPos={item.lPos}
-              lRot={item.lRot}
-            />
-          ) : null,
-        )}
-
         <Lights />
         <ViewControl />
       </Canvas>

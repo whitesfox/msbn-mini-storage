@@ -6,7 +6,6 @@ import { Text } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { displayInches } from "./displayInches";
 import { useStoreSize, useSliderUpdate } from "store";
-import { useRigidFrameStore } from "store/useRigidFrame";
 import { useDoorStore, useSliderStatus } from "store/useDoor";
 import { Window } from "3dcomponents/Models/Openings/Window";
 import { WalkDoor } from "3dcomponents/Models/Openings/WalkDoor";
@@ -42,7 +41,6 @@ function DraggableItem({
   const { width, length, basicLength, eaveHeight } = useStoreSize();
   const { doorData, updateDoorData, updateSliceDoorData } = useDoorStore();
 
-  const { rigidFrameData } = useRigidFrameStore();
   const ref = useRef<any>();
   const colorRef = useRef<any>();
   const arrowRef = useRef<any>(!null);
@@ -90,27 +88,6 @@ function DraggableItem({
           const rect2LeftDown: THREE.Vec2 = new THREE.Vector2(
             item.pos[2] + (item.size[0] / 2 + 0.1),
             item.pos[1] - (item.size[1] / 2 + 0.1),
-          );
-          if (
-            doOverlap(rect1LeftTop, rect1RightDown, rect2LeftTop, rect2LeftDown)
-          ) {
-            colorRef.current.color.set("red");
-            break;
-          } else {
-            colorRef.current.color.set("white");
-          }
-        }
-      }
-      for (let i = 0; i < rigidFrameData.length; i++) {
-        const item = rigidFrameData[i];
-        if (side === "SideWallRight" || side === "SideWallLeft") {
-          const rect2LeftTop: THREE.Vec2 = new THREE.Vector2(
-            item.pos[2] - 0.15,
-            eaveHeight,
-          );
-          const rect2LeftDown: THREE.Vec2 = new THREE.Vector2(
-            item.pos[2] + 0.15,
-            0,
           );
           if (
             doOverlap(rect1LeftTop, rect1RightDown, rect2LeftTop, rect2LeftDown)

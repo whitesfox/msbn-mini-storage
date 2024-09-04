@@ -8,27 +8,6 @@ type pitchList = {
   val: string;
 };
 
-type leanToPitchList = {
-  id: number;
-  val: string;
-  wall: string;
-};
-
-type leanToPitchOption = {
-  wall: string;
-  val: string;
-};
-
-type leanToDeltaHeight = {
-  wall: string;
-  val: number;
-};
-
-type leanToDropHeight = {
-  val: number;
-  valueKey: number;
-};
-
 interface useStoreSize {
   width: number;
   length: number;
@@ -39,9 +18,6 @@ interface useStoreSize {
   overhangEave: number;
   overhangPurlin: number;
   pitchOptionSize: string;
-  leanToDeltaHeight: Array<leanToDeltaHeight>;
-  leanToPitchOptionSize: Array<leanToPitchOption>;
-  leanToDropHeightSize: Array<leanToDeltaHeight>;
 
   setWidth: (value: number) => void;
   setLength: (value: number) => void;
@@ -50,8 +26,6 @@ interface useStoreSize {
   setEaveOverhang: (value: number) => void;
   setGableOverhang: (value: number) => void;
   setPitch: ({ id, val }: pitchList) => void;
-  setLeanToPitch: ({ id, val, wall }: leanToPitchList) => void;
-  setLeanToDropHeigth: ({ val, valueKey }: leanToDropHeight) => void;
 }
 
 export const useStoreSize = create<useStoreSize>((set) => ({
@@ -64,24 +38,6 @@ export const useStoreSize = create<useStoreSize>((set) => ({
   overhangPurlin: 0,
   deltaHeight: 45 / 14,
   pitchOptionSize: "3 / 12",
-  leanToDeltaHeight: [
-    { wall: "EndWallFront", val: 60 / 14 },
-    { wall: "EndWallBack", val: 60 / 14 },
-    { wall: "SideWallRight", val: 60 / 14 },
-    { wall: "SideWallLeft", val: 60 / 14 },
-  ],
-  leanToPitchOptionSize: [
-    { wall: "EndWallFront", val: "3 / 12" },
-    { wall: "EndWallBack", val: "3 / 12" },
-    { wall: "SideWallRight", val: "3 / 12" },
-    { wall: "SideWallLeft", val: "3 / 12" },
-  ],
-  leanToDropHeightSize: [
-    { wall: "EndWallFront", val: 5 },
-    { wall: "EndWallBack", val: 5 },
-    { wall: "SideWallRight", val: 5 },
-    { wall: "SideWallLeft", val: 5 },
-  ],
 
   setWidth: (value) => set((state) => ({ ...state, width: value })),
   setEaveHeight: (value) => set((state) => ({ ...state, eaveHeight: value })),
@@ -94,30 +50,6 @@ export const useStoreSize = create<useStoreSize>((set) => ({
   },
   setPitch: ({ id, val }: pitchList) =>
     set((state) => ({ ...state, deltaHeight: id, pitchOptionSize: val })),
-  setLeanToPitch: ({ id, val, wall }: leanToPitchList) =>
-    set((state) => ({
-      ...state,
-      leanToPitchOptionSize: state.leanToPitchOptionSize.map((item, _index) => {
-        if (item.wall === wall) {
-          const newData = {
-            wall: item.wall,
-            val: val,
-          };
-          return newData;
-        }
-        return item;
-      }),
-      leanToDeltaHeight: state.leanToDeltaHeight.map((item, _index) => {
-        if (item.wall === wall) {
-          const newData = {
-            wall: item.wall,
-            val: id,
-          };
-          return newData;
-        }
-        return item;
-      }),
-    })),
   setEaveOverhang: (value) =>
     set((state) => ({
       ...state,
@@ -133,20 +65,6 @@ export const useStoreSize = create<useStoreSize>((set) => ({
       ...state,
       bayLength: value,
       basicLength: state.length - value,
-    })),
-  setLeanToDropHeigth: ({ val, valueKey }: leanToDropHeight) =>
-    set((state) => ({
-      ...state,
-      leanToDropHeightSize: state.leanToDropHeightSize.map((item, index) => {
-        if (index === valueKey) {
-          const newData = {
-            wall: item.wall,
-            val: val,
-          };
-          return newData;
-        }
-        return item;
-      }),
     })),
 }));
 
@@ -272,21 +190,12 @@ export const useCameraPos = create<CameraPosProps>((set) => ({
 
 interface Placement {
   placement: { [key: string]: string };
-  leanToPlacement: { [key: string]: string };
-  leanToType: string;
   setPlacement: (value: { [key: string]: string }) => void;
-  setLeanToPlacement: (value: { [key: string]: string }) => void;
-  setLeanToType: (value: string) => void;
 }
 
 export const usePlacement = create<Placement>((set) => ({
   placement: {},
-  leanToPlacement: {},
-  leanToType: "Clouser",
   setPlacement: (value) => set((state) => ({ ...state, placement: value })),
-  setLeanToPlacement: (value) =>
-    set((state) => ({ ...state, leanToPlacement: value })),
-  setLeanToType: (value) => set((state) => ({ ...state, leanToType: value })),
 }));
 
 interface StyleProps {
@@ -412,22 +321,6 @@ export const useSliderUpdate = create<SliderUpdateProps>((set) => ({
   setPositionRange: (value) => {
     set((state) => ({ ...state, positionRange: value }));
   },
-}));
-
-interface UpgradeAddLeanTo {
-  multipleLeanTo: { [key: number]: number | string };
-  multipleLeanToOpenStatus: { [key: number]: boolean };
-  setMultipleLeanToOpenStatus: (value: { [key: number]: boolean }) => void;
-  setMultipleLeanTo: (value: { [key: number]: number | string }) => void;
-}
-
-export const useAddLeanToMultiple = create<UpgradeAddLeanTo>((set) => ({
-  multipleLeanTo: {},
-  multipleLeanToOpenStatus: {},
-  setMultipleLeanToOpenStatus: (value) =>
-    set((state) => ({ ...state, multipleLeanToOpenStatus: value })),
-  setMultipleLeanTo: (value) =>
-    set((state) => ({ ...state, multipleLeanTo: value })),
 }));
 
 interface IAddRecess {

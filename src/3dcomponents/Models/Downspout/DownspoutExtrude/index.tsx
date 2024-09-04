@@ -3,7 +3,6 @@
 /* eslint-disable react/no-unknown-property */
 import { easing } from "maath";
 import { DoubleSide, Shape } from "three";
-import { useLeanTo } from "store/useLeanTo";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import extrudeSetting from "assets/extrudeSetting.json";
@@ -29,8 +28,7 @@ export const DownspoutExtrude = ({
   const downspoutRef = useRef<any>();
   const { downspout } = useUpgrade();
   const downspoutVisible = useRef(true);
-  const { leanToData } = useLeanTo();
-  const { bayLength, overhangEave, leanToDropHeightSize } = useStoreSize();
+  const { overhangEave } = useStoreSize();
   const { downspoutsColor } = useStoreColor();
 
   const roofSlopeAngle = Math.atan((2 * deltaHeight) / width);
@@ -53,70 +51,11 @@ export const DownspoutExtrude = ({
   const downspoutHeight = useMemo(() => {
     let downspoutH = 0;
 
-    if (!flag) {
-      const item = leanToData.filter(
-        (item, _index) => item.wall === "SideWallRight",
-      );
-      const rightLeanToDropHeight = leanToDropHeightSize.filter(
-        (item, _index) => item.wall === "SideWallRight",
-      );
-      if (item[0].type !== "Closure") {
-        if (
-          pos[2] > item[0].lPos[2] - item[0].lLength / 2 + bayLength / 2 &&
-          pos[2] < item[0].lPos[2] + item[0].lLength / 2 + bayLength / 2
-        ) {
-          if (rightLeanToDropHeight[0].val !== 0) {
-            downspoutH =
-              eaveHeight -
-              (overhangEave / (width / 2)) * deltaHeight -
-              item[0].lEaveHeight -
-              item[0].lDeltaHeight;
-            downspoutVisible.current = true;
-          } else {
-            downspoutVisible.current = false;
-          }
-        } else {
-          downspoutH = eaveHeight - (overhangEave / (width / 2)) * deltaHeight;
-        }
-      } else {
-        downspoutH = eaveHeight - (overhangEave / (width / 2)) * deltaHeight;
-        downspoutVisible.current = true;
-      }
-    }
-
-    if (flag) {
-      const item = leanToData.filter(
-        (item, _index) => item.wall === "SideWallLeft",
-      );
-      const leftLeanToDropHeight = leanToDropHeightSize.filter(
-        (item, _index) => item.wall === "SideWallLeft",
-      );
-      if (item[0].type !== "Closure") {
-        if (
-          pos[2] > item[0].lPos[2] - item[0].lLength / 2 + bayLength / 2 &&
-          pos[2] < item[0].lPos[2] + item[0].lLength / 2 + bayLength / 2
-        ) {
-          if (leftLeanToDropHeight[0].val !== 0) {
-            downspoutH =
-              eaveHeight -
-              (overhangEave / (width / 2)) * deltaHeight -
-              item[0].lEaveHeight -
-              item[0].lDeltaHeight;
-            downspoutVisible.current = true;
-          } else {
-            downspoutVisible.current = false;
-          }
-        } else {
-          downspoutH = eaveHeight - (overhangEave / (width / 2)) * deltaHeight;
-        }
-      } else {
-        downspoutH = eaveHeight - (overhangEave / (width / 2)) * deltaHeight;
-        downspoutVisible.current = true;
-      }
-    }
+    downspoutH = eaveHeight - (overhangEave / (width / 2)) * deltaHeight;
+    downspoutVisible.current = true;
 
     return downspoutH;
-  }, [deltaHeight, eaveHeight, leanToData, overhangEave, width]);
+  }, [deltaHeight, eaveHeight, overhangEave, width]);
 
   //Change the downspout color
   useFrame((_state, delta) =>

@@ -6,7 +6,6 @@ import { useMemo } from "react";
 import { useStoreSize } from "store";
 import { usePlacement } from "store";
 import { useStyle } from "store";
-import { useLeanTo } from "store/useLeanTo";
 import { TdataList } from "components/DisignPanel/Combobox/ComboboxPanel";
 
 const reverseArr = (input: TdataList[]) => {
@@ -129,16 +128,8 @@ export const recessCeilingHeight = Array.from({ length: 4 }, () => 0).map(
 );
 
 export const doorBuildingList = () => {
-  const { leanToState } = useLeanTo();
   const listArray: TdataList[] = [];
   listArray.push({ id: 0, val: "Main building" });
-  let count = 1;
-  leanToState.map((item) => {
-    if (item.seted) {
-      listArray.push({ id: count, val: "Lean-to " + Number(count) });
-      count++;
-    }
-  });
 
   return listArray;
 };

@@ -5,19 +5,6 @@ export const costCalculationFun = (
   priceList: { [key: string]: any },
   priceData: { [key: string]: { [key: string]: any } },
   booleanTypeOption?: boolean,
-  placement?: { [key: string]: string },
-  leanToWidth?: {
-    [key: string]: number;
-  },
-  leanToLength?: {
-    [key: string]: number;
-  },
-  leanToEaveHeight?: {
-    [key: string]: number;
-  },
-  leanToPitchList?: {
-    [key: string]: string;
-  },
   eaveHeight?: number,
 ) => {
   const tempPriceList = { ...priceList };

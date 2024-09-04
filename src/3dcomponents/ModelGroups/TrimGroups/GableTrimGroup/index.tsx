@@ -6,7 +6,6 @@ import { HangOnTrim } from "3dcomponents/Models/Trim/HangOnTrim";
 import { BaseTrim } from "3dcomponents/Models/Trim/BaseTrim";
 import { OutsideCornerTrim } from "3dcomponents/Models/Trim/OutsideCornerTrim";
 import { useDoorStore } from "store/useDoor";
-import { useUpgrade } from "store";
 
 export const GableTrimGroup = () => {
   const {

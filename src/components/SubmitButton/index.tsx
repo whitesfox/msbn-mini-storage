@@ -1,7 +1,6 @@
 import { useStoreSize } from "store";
 import { useUpgrade } from "store";
 import { useStyle } from "store";
-import { useLeanTo } from "store/useLeanTo";
 import { useStoreColor } from "store";
 import { useDoorCombo, useDoorStore } from "store/useDoor";
 
@@ -13,15 +12,11 @@ export const SubmitButton = () => {
     deltaHeight,
     pitchOptionSize,
     bayLength,
-    leanToDropHeightSize,
-    leanToDeltaHeight,
-    leanToPitchOptionSize,
     overhangEave,
     overhangPurlin,
   } = useStoreSize();
   const { downspout } = useUpgrade();
   const { label } = useStyle();
-  const { leanToData } = useLeanTo();
   const {
     roofColor,
     roofTrimColor,
@@ -65,60 +60,6 @@ export const SubmitButton = () => {
     paramsContent += "&ds=";
     if (downspout) paramsContent += "true";
     else paramsContent += "false";
-
-    //Lean to information
-    leanToData.map((item, index) => {
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.wall;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.type;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lWidth;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lLength;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lEaveHeight;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lDeltaHeight;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lInsetBayLength;
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lPos[0];
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lPos[1];
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lPos[2];
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lRot[0];
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lRot[1];
-      paramsContent += "&lt" + Number(index + 1) + "=";
-      paramsContent += item.lRot[2];
-    });
-
-    //Lean to dropheight
-    leanToDropHeightSize.map((item, index) => {
-      paramsContent += "&ltdr" + Number(index + 1) + "=";
-      paramsContent += item.wall;
-      paramsContent += "&ltdr" + Number(index + 1) + "=";
-      paramsContent += item.val;
-    });
-
-    //Lean to deltaheight
-    leanToDeltaHeight.map((item, index) => {
-      paramsContent += "&ltdh" + Number(index + 1) + "=";
-      paramsContent += item.wall;
-      paramsContent += "&ltdh" + Number(index + 1) + "=";
-      paramsContent += item.val;
-    });
-
-    //Lean to pitchoption
-    leanToPitchOptionSize.map((item, index) => {
-      paramsContent += "&ltp" + Number(index + 1) + "=";
-      paramsContent += item.wall;
-      paramsContent += "&ltp" + Number(index + 1) + "=";
-      paramsContent += item.val;
-    });
 
     //Eave overhang
     paramsContent += "&eoh=";

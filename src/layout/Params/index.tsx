@@ -5,11 +5,9 @@ import {
   useStoreSize,
   useStyle,
   useUpgrade,
-  useAddLeanToMultiple,
   usePlacement,
   useStoreColor,
 } from "store";
-import { useLeanTo } from "store/useLeanTo";
 import { DoorInfo, SliceDoorInfo } from "store/useDoor";
 import { useDoorStore, useDoorCombo, useDoorName } from "store/useDoor";
 import { useMultipleDoorsWindows, useBuildingForWindowDoor } from "store";
@@ -26,17 +24,11 @@ export const Params = () => {
     setEaveHeight,
     setPitch,
     setBayLength,
-    setLeanToDropHeigth,
-    setLeanToPitch,
     setEaveOverhang,
     setGableOverhang,
   } = useStoreSize();
   const { label, setStyle } = useStyle();
   const { setdownspout } = useUpgrade();
-  const { updateLeanToData, addLeanToState, addLeanToInsetBay } = useLeanTo();
-  const { setMultipleLeanTo, setMultipleLeanToOpenStatus } =
-    useAddLeanToMultiple();
-  const { setPlacement } = usePlacement();
   const {
     setRoofColor,
     setSideWallColor,
@@ -95,242 +87,6 @@ export const Params = () => {
       const downspoutState =
         String(searchParams.get("ds")) === "false" ? false : true;
       setdownspout(downspoutState);
-
-      //Lean-to
-      const leanTo1 = searchParams.getAll("lt1");
-      const leanTo2 = searchParams.getAll("lt2");
-      const leanTo3 = searchParams.getAll("lt3");
-      const leanTo4 = searchParams.getAll("lt4");
-
-      updateLeanToData({
-        wall: leanTo1[0],
-        type: leanTo1[1],
-        lWidth: Number(leanTo1[2]),
-        lLength: Number(leanTo1[3]),
-        lEaveHeight: Number(leanTo1[4]),
-        lDeltaHeight: Number(leanTo1[5]),
-        lInsetBayLength: Number(leanTo1[6]),
-        lPos: [Number(leanTo1[7]), Number(leanTo1[8]), Number(leanTo1[9])],
-        lRot: [Number(leanTo1[10]), Number(leanTo1[11]), Number(leanTo1[12])],
-      });
-      updateLeanToData({
-        wall: leanTo2[0],
-        type: leanTo2[1],
-        lWidth: Number(leanTo2[2]),
-        lLength: Number(leanTo2[3]),
-        lEaveHeight: Number(leanTo2[4]),
-        lDeltaHeight: Number(leanTo2[5]),
-        lInsetBayLength: Number(leanTo2[6]),
-        lPos: [Number(leanTo2[7]), Number(leanTo2[8]), Number(leanTo2[9])],
-        lRot: [Number(leanTo2[10]), Number(leanTo2[11]), Number(leanTo2[12])],
-      });
-      updateLeanToData({
-        wall: leanTo3[0],
-        type: leanTo3[1],
-        lWidth: Number(leanTo3[2]),
-        lLength: Number(leanTo3[3]),
-        lEaveHeight: Number(leanTo3[4]),
-        lDeltaHeight: Number(leanTo3[5]),
-        lInsetBayLength: Number(leanTo3[6]),
-        lPos: [Number(leanTo3[7]), Number(leanTo3[8]), Number(leanTo3[9])],
-        lRot: [Number(leanTo3[10]), Number(leanTo3[11]), Number(leanTo3[12])],
-      });
-      updateLeanToData({
-        wall: leanTo4[0],
-        type: leanTo4[1],
-        lWidth: Number(leanTo4[2]),
-        lLength: Number(leanTo4[3]),
-        lEaveHeight: Number(leanTo4[4]),
-        lDeltaHeight: Number(leanTo4[5]),
-        lInsetBayLength: Number(leanTo4[6]),
-        lPos: [Number(leanTo4[7]), Number(leanTo4[8]), Number(leanTo4[9])],
-        lRot: [Number(leanTo4[10]), Number(leanTo4[11]), Number(leanTo4[12])],
-      });
-
-      let leanToCount = 0;
-      const tempPlacement = {} as {
-        [key: number]: string;
-      };
-      const tempMultipleLeanTo = {} as {
-        [key: number]: number | string;
-      };
-      const tempLeanToOpenStatus = {} as {
-        [key: number]: boolean;
-      };
-
-      if (leanTo1[1] !== "Closure") {
-        if (leanTo1[1] === "Inset Bay") {
-          addLeanToInsetBay({
-            wall: leanTo1[0],
-            seted: true,
-          });
-        }
-        addLeanToState({
-          wall: leanTo1[0],
-          seted: true,
-        });
-
-        if (tempLeanToOpenStatus[leanToCount]) {
-          tempLeanToOpenStatus[leanToCount] =
-            !tempLeanToOpenStatus[leanToCount];
-        } else {
-          tempLeanToOpenStatus[leanToCount] = true;
-        }
-        setMultipleLeanToOpenStatus(tempLeanToOpenStatus);
-
-        tempMultipleLeanTo[leanToCount] = 1;
-        setMultipleLeanTo(tempMultipleLeanTo);
-
-        tempPlacement[leanToCount] = "Left Endwall";
-        leanToCount += 1;
-        setPlacement(tempPlacement);
-      } else {
-        addLeanToState({
-          wall: leanTo1[0],
-          seted: false,
-        });
-      }
-
-      if (leanTo2[1] !== "Closure") {
-        if (leanTo2[1] === "Inset Bay") {
-          addLeanToInsetBay({
-            wall: leanTo2[0],
-            seted: true,
-          });
-        }
-        addLeanToState({
-          wall: leanTo2[0],
-          seted: true,
-        });
-
-        if (tempLeanToOpenStatus[leanToCount]) {
-          tempLeanToOpenStatus[leanToCount] =
-            !tempLeanToOpenStatus[leanToCount];
-        } else {
-          tempLeanToOpenStatus[leanToCount] = true;
-        }
-        setMultipleLeanToOpenStatus(tempLeanToOpenStatus);
-
-        tempMultipleLeanTo[leanToCount] = 1;
-        setMultipleLeanTo(tempMultipleLeanTo);
-
-        tempPlacement[leanToCount] = "Right Endwall";
-        leanToCount += 1;
-        setPlacement(tempPlacement);
-      } else {
-        addLeanToState({
-          wall: leanTo2[0],
-          seted: false,
-        });
-      }
-
-      if (leanTo3[1] !== "Closure") {
-        if (leanTo3[1] === "Inset Bay") {
-          addLeanToInsetBay({
-            wall: leanTo3[0],
-            seted: true,
-          });
-        }
-        addLeanToState({
-          wall: leanTo3[0],
-          seted: true,
-        });
-
-        if (tempLeanToOpenStatus[leanToCount]) {
-          tempLeanToOpenStatus[leanToCount] =
-            !tempLeanToOpenStatus[leanToCount];
-        } else {
-          tempLeanToOpenStatus[leanToCount] = true;
-        }
-        setMultipleLeanToOpenStatus(tempLeanToOpenStatus);
-
-        tempMultipleLeanTo[leanToCount] = 1;
-        setMultipleLeanTo(tempMultipleLeanTo);
-
-        tempPlacement[leanToCount] = "Front Sidewall";
-        leanToCount += 1;
-        setPlacement(tempPlacement);
-      } else {
-        addLeanToState({
-          wall: leanTo3[0],
-          seted: false,
-        });
-      }
-
-      if (leanTo4[1] !== "Closure") {
-        if (leanTo4[1] === "Inset Bay") {
-          addLeanToInsetBay({
-            wall: leanTo4[0],
-            seted: true,
-          });
-        }
-        addLeanToState({
-          wall: leanTo4[0],
-          seted: true,
-        });
-
-        if (tempLeanToOpenStatus[leanToCount]) {
-          tempLeanToOpenStatus[leanToCount] =
-            !tempLeanToOpenStatus[leanToCount];
-        } else {
-          tempLeanToOpenStatus[leanToCount] = true;
-        }
-        setMultipleLeanToOpenStatus(tempLeanToOpenStatus);
-
-        tempMultipleLeanTo[leanToCount] = 1;
-        setMultipleLeanTo(tempMultipleLeanTo);
-
-        tempPlacement[leanToCount] = "Back Sidewall";
-        leanToCount += 1;
-        setPlacement(tempPlacement);
-      } else {
-        addLeanToState({
-          wall: leanTo4[0],
-          seted: false,
-        });
-      }
-
-      //Lean-to drop height
-      const leanToDropHeight1 = searchParams.getAll("ltdr1");
-      const leanToDropHeight2 = searchParams.getAll("ltdr2");
-      const leanToDropHeight3 = searchParams.getAll("ltdr3");
-      const leanToDropHeight4 = searchParams.getAll("ltdr4");
-
-      setLeanToDropHeigth({ val: Number(leanToDropHeight1[1]), valueKey: 0 });
-      setLeanToDropHeigth({ val: Number(leanToDropHeight2[1]), valueKey: 1 });
-      setLeanToDropHeigth({ val: Number(leanToDropHeight3[1]), valueKey: 2 });
-      setLeanToDropHeigth({ val: Number(leanToDropHeight4[1]), valueKey: 3 });
-
-      //Lean-to deltaheight
-      const leanToDeltaHeight1 = searchParams.getAll("ltdh1");
-      const leanToDeltaHeight2 = searchParams.getAll("ltdh2");
-      const leanToDeltaHeight3 = searchParams.getAll("ltdh3");
-      const leanToDeltaHeight4 = searchParams.getAll("ltdh4");
-      const leanToPitchOptionSize1 = searchParams.getAll("ltp1");
-      const leanToPitchOptionSize2 = searchParams.getAll("ltp2");
-      const leanToPitchOptionSize3 = searchParams.getAll("ltp3");
-      const leanToPitchOptionSize4 = searchParams.getAll("ltp4");
-
-      setLeanToPitch({
-        id: Number(leanToDeltaHeight1[1]),
-        val: leanToPitchOptionSize1[1],
-        wall: leanToDeltaHeight1[0],
-      });
-      setLeanToPitch({
-        id: Number(leanToDeltaHeight2[1]),
-        val: leanToPitchOptionSize2[1],
-        wall: leanToDeltaHeight2[0],
-      });
-      setLeanToPitch({
-        id: Number(leanToDeltaHeight3[1]),
-        val: leanToPitchOptionSize3[1],
-        wall: leanToDeltaHeight3[0],
-      });
-      setLeanToPitch({
-        id: Number(leanToDeltaHeight4[1]),
-        val: leanToPitchOptionSize4[1],
-        wall: leanToDeltaHeight4[0],
-      });
 
       //Eavan overhang and Gable overhang
       const eaveOverHangValue = Number(searchParams.get("eoh"));
